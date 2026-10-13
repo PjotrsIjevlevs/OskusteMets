@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Oleg — Perekond</title>
+<title>Perekond</title>
 <style>
 :root{--ink:#18343b;--accent:#1e6570;--paper:#faf9f4;--line:#d9e2df;--soft:#edf5f2}
 *{box-sizing:border-box}
@@ -30,14 +30,14 @@ hr{border:0;border-top:1px solid var(--line);margin:16px 0}
 <header class="hero">
 <div>ISESEISEV E-ÕPE · UMBES 25 MINUTIT</div>
 <h1>Perekond ja sugulased</h1>
-<p>Oleg, harjuta pereliikmete sõnavara, küsimust <b>Kelle?</b> ja perekonnast rääkimist.</p>
+<p>Harjuta pereliikmete sõnavara, küsimust <b>Kelle?</b> ja perekonnast rääkimist.</p>
 </header>
 
 <form id="lessonForm">
 <section class="card">
 <h2>Enne alustamist</h2>
 <label>Sinu nimi / Твоё имя
-<input id="studentName" type="text" required placeholder="Oleg"></label>
+<input id="studentName" type="text" required placeholder="Sisesta oma nimi / Введи имя"></label>
 </section>
 
 <section class="card">
@@ -122,7 +122,7 @@ function scoreQuiz(){
  document.getElementById("qscore").className="feedback "+(score>=5?"good":"bad");
  return {score,lines:lines.join("\n")};
 }
-const TEACHER_EMAIL = "YOUR_EMAIL_HERE"; // Replace with your email before publishing
+const TEACHER_EMAIL = "glorrass@gmail.com"; // Replace with your email before publishing
 
 document.getElementById("lessonForm").addEventListener("submit",function(e){
  e.preventDefault();
