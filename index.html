@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="et">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oleg — Perekond</title>
+<style>
+:root{--ink:#18343b;--accent:#1e6570;--paper:#faf9f4;--line:#d9e2df;--soft:#edf5f2}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:800px;margin:auto;padding:18px 14px 42px}
+.hero{background:var(--ink);color:white;padding:25px 22px;border-radius:18px}
+.hero h1{font-size:clamp(28px,6vw,40px);line-height:1.15;margin:8px 0}
+.hero p{margin:8px 0 0;color:#e1eeee}
+.card{background:white;border:1px solid var(--line);border-radius:15px;padding:18px;margin:14px 0}
+h2{font-size:21px;margin:0 0 10px}
+.hint{background:var(--soft);padding:13px;border-radius:10px;margin:12px 0}
+label{display:block;margin:9px 0}
+input[type=text],textarea{display:block;width:100%;padding:11px;border:1px solid #aebfba;border-radius:9px;font:inherit;margin-top:5px;color:var(--ink);background:white}
+textarea{min-height:100px;resize:vertical}
+button{border:0;border-radius:10px;padding:12px 16px;background:var(--accent);color:white;font:inherit;font-weight:650;cursor:pointer;margin:6px 5px 6px 0}
+button:disabled{opacity:.55;cursor:wait}
+.muted{font-size:13px;color:#5e7376}
+.feedback{font-weight:650;margin-top:10px}
+.good{color:#176b45}.bad{color:#9a452e}
+hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+</style>
+</head>
+<body><main>
+<header class="hero">
+<div>ISESEISEV E-ÕPE · UMBES 25 MINUTIT</div>
+<h1>Perekond ja sugulased</h1>
+<p>Oleg, harjuta pereliikmete sõnavara, küsimust <b>Kelle?</b> ja perekonnast rääkimist.</p>
+</header>
+
+<form id="lessonForm">
+<section class="card">
+<h2>Enne alustamist</h2>
+<label>Sinu nimi / Твоё имя
+<input id="studentName" type="text" required placeholder="Oleg"></label>
+</section>
+
+<section class="card">
+<h2>1. Sõnastik / Словарь</h2>
+<p><b>pere</b> — семья · <b>sugulased</b> — родственники · <b>vanaema/vanaisa</b> — бабушка/дедушка · <b>ema/isa</b> — мама/папа · <b>õde/vend</b> — сестра/брат · <b>tädi/onu</b> — тётя/дядя · <b>poeg/tütar</b> — сын/дочь · <b>lapsed</b> — дети · <b>abikaasa</b> — супруг(а)</p>
+<div class="hint"><b>Грамматика.</b> <i>ema vend</i> — брат мамы; <i>isa õde</i> — сестра папы; <i>Martini ema</i> — мама Мартина. <i>minu</i> — мой, <i>sinu</i> — твой, <i>tema</i> — его/её, <i>meie</i> — наш, <i>teie</i> — ваш, <i>nende</i> — их.</div>
+</section>
+
+<section class="card">
+<h2>2. Vali õige vastus / Выбери ответ</h2>
+<div id="quiz"></div>
+<p id="qscore" class="feedback"></p>
+</section>
+
+<section class="card">
+<h2>3. Täida lüngad / Заполни пропуски</h2>
+<p class="muted">Впиши подходящее слово на эстонском языке.</p>
+<div id="fills"></div>
+</section>
+
+<section class="card">
+<h2>4. Loe ja vasta / Прочитай и ответь</h2>
+<div class="hint">Minu nimi on Oleg. Minu peres on neli inimest: mina, minu ema, minu isa ja minu õde. Minu õde on minust kolm aastat noorem. Minu vanavanemad elavad teises linnas. Me külastame neid nädalavahetusel. Minu emal on üks vend ja minu isal on üks õde.</div>
+<div id="reads"></div>
+</section>
+
+<section class="card">
+<h2>5. Räägi oma perest / Расскажи о семье</h2>
+<p>Напиши 3–5 предложений. Можно придумать семью, если не хочется писать о своей.</p>
+<textarea id="writing" placeholder="Minu peres on ..."></textarea>
+<p class="muted">Свободный текст проверит преподаватель.</p>
+</section>
+
+<section class="card">
+<h2>6. Saada vastused õpetajale / Отправь ответы преподавателю</h2>
+<p>Нажми кнопку ниже, когда закончишь. Откроется почтовое приложение с готовым письмом. Проверь его и нажми «Отправить».</p>
+<button id="sendBtn" type="submit">Отправить ответы</button>
+<p id="status" class="feedback" role="status"></p>
+<p class="muted">Для отправки на устройстве ученика должно быть настроено почтовое приложение.</p>
+</section>
+</form>
+</main>
+<script>
+const quizItems=[
+["„Vanaema” tähendab …",["бабушка","тётя","дочь"],0],
+["Ema vend on minu …",["onu","tädi","vanaisa"],0],
+["„Minu pere” tähendab …",["твоя семья","моя семья","их семья"],1],
+["„Kelle?” küsib …",["где?","когда?","чей? / кого?"],2],
+["„Nende vanaema” tähendab …",["их бабушка","её бабушка","моя бабушка"],0],
+["„Poeg” on …",["дочь","сын","супруг"],1]
+];
+const fillItems=[
+["Minu ema ema on minu _____.","vanaema"],
+["Minu isa vend on minu _____.","onu"],
+["Mari ja Peeter on abielus. _____ pere elab Tartus.","nende"],
+["Mul on kaks _____. (дети)","last"],
+["Minu isa õde on minu _____.","tädi"],
+["Jaani õde on Liis. _____ nimi on Liis.","tema"]
+];
+const readItems=[
+["Mitu inimest on Olegi peres?",["neli","4"]],
+["Kes on Olegist kolm aastat noorem?",["õde"]],
+["Kus elavad Olegi vanavanemad?",["teises linnas"]],
+["Mitu venda on Olegi emal?",["üks","1"]],
+["Kas Olegi isal on vend või õde?",["õde"]]
+];
+const quiz=document.getElementById("quiz");
+quizItems.forEach((x,i)=>{
+ const box=document.createElement("div");box.innerHTML=`<b>${i+1}. ${x[0]}</b>`+
+ x[1].map((a,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${a}</label>`).join("");
+ quiz.appendChild(box);if(i<quizItems.length-1){const hr=document.createElement("hr");quiz.appendChild(hr)}
+});
+const fills=document.getElementById("fills");
+fillItems.forEach((x,i)=>{fills.insertAdjacentHTML("beforeend",`<label>${i+1}. ${x[0]}<input id="f${i}" type="text" autocomplete="off"></label>`)});
+const reads=document.getElementById("reads");
+readItems.forEach((x,i)=>{reads.insertAdjacentHTML("beforeend",`<label>${i+1}. ${x[0]}<input id="r${i}" type="text"></label>`)});
+const norm=s=>(s||"").toLowerCase().trim().replace(/[.,!?;:]/g,"").replace(/\s+/g," ");
+function scoreQuiz(){
+ let score=0,lines=[];
+ quizItems.forEach((x,i)=>{const a=document.querySelector(`input[name="q${i}"]:checked`);if(a&&Number(a.value)===x[2])score++;lines.push(`${i+1}. ${a?x[1][Number(a.value)]:"(без ответа)"}`)});
+ document.getElementById("qscore").textContent=`Правильных ответов: ${score}/${quizItems.length}`;
+ document.getElementById("qscore").className="feedback "+(score>=5?"good":"bad");
+ return {score,lines:lines.join("\n")};
+}
+const TEACHER_EMAIL = "YOUR_EMAIL_HERE"; // Replace with your email before publishing
+
+document.getElementById("lessonForm").addEventListener("submit",function(e){
+ e.preventDefault();
+ const name=document.getElementById("studentName").value.trim();
+ if(!name){document.getElementById("status").textContent="Пожалуйста, напиши своё имя.";return}
+ const q=scoreQuiz();
+ const fillAnswers=fillItems.map((x,i)=>`${i+1}. ${document.getElementById("f"+i).value.trim()||"(без ответа)"}`).join("\n");
+ const readAnswers=readItems.map((x,i)=>`${i+1}. ${document.getElementById("r"+i).value.trim()||"(без ответа)"}`).join("\n");
+ const body=`Ученик: ${name}\n\nТест: ${q.score}/${quizItems.length}\n\nВыбор ответов:\n${q.lines}\n\nЗаполни пропуски:\n${fillAnswers}\n\nОтветы по тексту:\n${readAnswers}\n\nМой рассказ о семье:\n${document.getElementById("writing").value.trim()||"(без ответа)"}`;
+ const status=document.getElementById("status");
+ if(TEACHER_EMAIL === "YOUR_EMAIL_HERE"){
+   status.textContent="Преподавателю: сначала замени YOUR_EMAIL_HERE в файле index.html на свой адрес электронной почты.";
+   status.className="feedback bad"; return;
+ }
+ const mailto=`mailto:${TEACHER_EMAIL}?subject=${encodeURIComponent("Olegi vastused — Perekond")}&body=${encodeURIComponent(body)}`;
+ status.textContent="Открываем почтовое приложение. Проверь письмо и нажми «Отправить».";
+ status.className="feedback good";
+ window.location.href=mailto;
+});
+</script></body></html>
