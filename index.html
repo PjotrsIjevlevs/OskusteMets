@@ -1,122 +1,560 @@
+
 <!doctype html>
 <html lang="et">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Perekond — e-õpe</title>
+<meta name="theme-color" content="#0b1714">
+
+<title>Perekond — Orbit Eesti</title>
+
 <style>
-:root{--ink:#18343b;--accent:#1e6570;--paper:#faf9f4;--line:#d9e2df;--soft:#edf5f2}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-main{max-width:800px;margin:auto;padding:18px 14px 42px}
-.hero{background:var(--ink);color:white;padding:25px 22px;border-radius:18px}
-.hero h1{font-size:clamp(28px,6vw,40px);line-height:1.15;margin:8px 0}
-.hero p{margin:8px 0 0;color:#e1eeee}
-.card{background:white;border:1px solid var(--line);border-radius:15px;padding:18px;margin:14px 0}
-h2{font-size:21px;margin:0 0 10px}
-.hint{background:var(--soft);padding:13px;border-radius:10px;margin:12px 0}
-label{display:block;margin:9px 0}
-input[type=text],textarea{display:block;width:100%;padding:11px;border:1px solid #aebfba;border-radius:9px;font:inherit;margin-top:5px;color:var(--ink);background:white}
-textarea{min-height:100px;resize:vertical}
-button{border:0;border-radius:10px;padding:12px 16px;background:var(--accent);color:white;font:inherit;font-weight:650;cursor:pointer;margin:6px 5px 6px 0}
-button:disabled{opacity:.55;cursor:wait}
-.muted{font-size:13px;color:#5e7376}
-.feedback{font-weight:650;margin-top:10px}
-.good{color:#176b45}.bad{color:#9a452e}
-hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+:root {
+  /* ORBIT EESTI — ENCHANTED FOREST */
+  --forest: #0b1714;
+  --forest-light: #11221b;
+  --forest-card: #162b22;
+  --forest-card-alt: #1b3429;
+  --forest-deep: #09110f;
+
+  --ink: #e7f0e9;
+  --ink-soft: #c5d8cc;
+  --muted: #9db6a7;
+
+  --accent: #55b89a;
+  --accent-hover: #75d1b0;
+  --accent-dark: #173f32;
+
+  --line: #2d4b3b;
+  --soft: #1b382c;
+
+  --success: #76d7a6;
+  --error: #f0a08f;
+
+  --radius: 18px;
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      ellipse at 15% 0%,
+      rgba(48, 105, 75, 0.18),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 100% 35%,
+      rgba(33, 91, 76, 0.12),
+      transparent 35%
+    ),
+    var(--forest);
+  color: var(--ink);
+  font: 16px/1.65 system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--forest-deep);
+}
+
+main {
+  width: min(100%, 820px);
+  margin: 0 auto;
+  padding: 22px 15px 48px;
+}
+
+/* HERO */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(24px, 6vw, 40px);
+  margin-bottom: 22px;
+  border: 1px solid #315441;
+  border-radius: 24px;
+  background:
+    radial-gradient(
+      ellipse at 90% 5%,
+      rgba(85, 184, 154, 0.20),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 0% 100%,
+      rgba(42, 103, 69, 0.25),
+      transparent 45%
+    ),
+    linear-gradient(145deg, #19392a, #10231b 68%, #0d1b16);
+  box-shadow: var(--shadow);
+}
+
+.hero::after {
+  content: "✦";
+  position: absolute;
+  z-index: -1;
+  top: 12px;
+  right: 24px;
+  color: rgba(164, 222, 190, 0.18);
+  font-size: clamp(100px, 23vw, 175px);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #9fe0bd;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  max-width: 600px;
+  margin: 0;
+  color: #f0f7f1;
+  font-size: clamp(30px, 7vw, 44px);
+  line-height: 1.16;
+  letter-spacing: -0.035em;
+}
+
+.hero p {
+  max-width: 600px;
+  margin: 14px 0 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+}
+
+/* LESSON SECTIONS */
+
+.card {
+  margin: 16px 0;
+  padding: clamp(17px, 4vw, 24px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(27, 52, 41, 0.96),
+      rgba(18, 37, 29, 0.98)
+    );
+  box-shadow: 0 7px 22px rgba(0, 0, 0, 0.10);
+}
+
+.card h2 {
+  margin: 0 0 14px;
+  color: #d9f1df;
+  font-size: clamp(19px, 4.5vw, 23px);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.card p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card b {
+  color: #b7e7c9;
+}
+
+.hint {
+  margin: 15px 0;
+  padding: 15px 16px;
+  border: 1px solid #345b43;
+  border-left: 3px solid var(--accent);
+  border-radius: 12px;
+  background:
+    linear-gradient(130deg, #1d3d2d, #172e24);
+  color: #d7e8dc;
+}
+
+.hint b {
+  color: #8de0b4;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+hr {
+  height: 1px;
+  margin: 18px 0;
+  border: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--line),
+    transparent
+  );
+}
+
+/* FORM ELEMENTS */
+
+label {
+  display: block;
+  margin: 12px 0;
+  color: var(--ink-soft);
+}
+
+input[type="text"],
+textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin-top: 7px;
+  padding: 12px 13px;
+  border: 1px solid #3a5b49;
+  border-radius: 10px;
+  outline: none;
+  background: #0e1c16;
+  color: var(--ink);
+  font: inherit;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+  color: #829b8b;
+  opacity: 1;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  border-color: var(--accent);
+  background: #11241b;
+  box-shadow: 0 0 0 3px rgba(85, 184, 154, 0.13);
+}
+
+textarea {
+  min-height: 125px;
+  resize: vertical;
+}
+
+/* RADIO BUTTONS */
+
+input[type="radio"] {
+  width: 17px;
+  height: 17px;
+  margin: 0 8px 0 0;
+  accent-color: var(--accent);
+  vertical-align: -3px;
+  cursor: pointer;
+}
+
+#quiz label {
+  padding: 9px 11px;
+  margin: 7px 0;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: rgba(9, 23, 16, 0.30);
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+#quiz label:has(input:checked) {
+  border-color: #427b5b;
+  background: #203f2e;
+  color: #e8f7eb;
+}
+
+#quiz label:hover {
+  background: #20392b;
+}
+
+/* BUTTONS */
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  margin: 7px 5px 7px 0;
+  padding: 12px 19px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  background: var(--accent);
+  color: #0b2118;
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  background: var(--accent-hover);
+  box-shadow: 0 5px 18px rgba(85, 184, 154, 0.14);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:focus-visible {
+  outline: 3px solid #a1e8c5;
+  outline-offset: 3px;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+  transform: none;
+  box-shadow: none;
+}
+
+/* FEEDBACK */
+
+.feedback {
+  margin-top: 12px;
+  font-weight: 700;
+}
+
+.good {
+  color: var(--success);
+}
+
+.bad {
+  color: var(--error);
+}
+
+#status {
+  overflow-wrap: anywhere;
+}
+
+#qscore:empty {
+  display: none;
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* SMALL SCREENS */
+
+@media (max-width: 480px) {
+  main {
+    padding: 13px 11px 32px;
+  }
+
+  .hero {
+    border-radius: 19px;
+  }
+
+  .card {
+    border-radius: 15px;
+  }
+
+  .hint {
+    padding: 12px;
+  }
+
+  button {
+    width: 100%;
+    margin: 8px 0;
+  }
+}
 </style>
 </head>
+
 <body>
 <main>
+
 <header class="hero">
-<div>ISESEISEV E-ÕPE · UMBES 25 MINUTIT</div>
-<h1>Perekond ja sugulased</h1>
-<p>Harjuta pereliikmete sõnavara, küsimust <b>Kelle?</b> ja perekonnast rääkimist.</p>
+  <div class="eyebrow">✦ Orbit Eesti · Iseseisev e-õpe</div>
+  <h1>Perekond ja sugulased</h1>
+  <p>
+    Harjuta pereliikmete sõnavara, küsimust
+    <b>Kelle?</b> ja perekonnast rääkimist.
+  </p>
+  <p class="muted">Umbes 25 minutit · Самостоятельное обучение</p>
 </header>
 
 <form id="lessonForm">
+
 <section class="card">
-<h2>Enne alustamist</h2>
-<label>Sinu nimi / Твоё имя (необязательно)
-<input id="studentName" type="text" placeholder="Sisesta oma nimi / Введи имя"></label>
+  <h2>Enne alustamist / Перед началом</h2>
+  <label>Sinu nimi / Твоё имя (необязательно)
+    <input
+      id="studentName"
+      type="text"
+      placeholder="Sisesta oma nimi / Введи имя"
+      autocomplete="name">
+  </label>
 </section>
 
 <section class="card">
-<h2>1. Sõnastik / Словарь</h2>
-<p><b>pere</b> — семья · <b>sugulased</b> — родственники · <b>vanaema/vanaisa</b> — бабушка/дедушка · <b>ema/isa</b> — мама/папа · <b>õde/vend</b> — сестра/брат · <b>tädi/onu</b> — тётя/дядя · <b>poeg/tütar</b> — сын/дочь · <b>lapsed</b> — дети · <b>abikaasa</b> — супруг(а)</p>
-<div class="hint"><b>Грамматика.</b> <i>ema vend</i> — брат мамы; <i>isa õde</i> — сестра папы; <i>Marteni ema</i> — мама Мартена. <i>minu</i> — мой, <i>sinu</i> — твой, <i>tema</i> — его/её, <i>meie</i> — наш, <i>teie</i> — ваш, <i>nende</i> — их.</div>
+  <h2>1. Sõnastik / Словарь</h2>
+
+  <p>
+    <b>pere</b> — семья ·
+    <b>sugulased</b> — родственники ·
+    <b>vanaema/vanaisa</b> — бабушка/дедушка ·
+    <b>ema/isa</b> — мама/папа ·
+    <b>õde/vend</b> — сестра/брат ·
+    <b>tädi/onu</b> — тётя/дядя ·
+    <b>poeg/tütar</b> — сын/дочь ·
+    <b>lapsed</b> — дети ·
+    <b>abikaasa</b> — супруг(а)
+  </p>
+
+  <div class="hint">
+    <b>Грамматика.</b>
+    <i>ema vend</i> — брат мамы;
+    <i>isa õde</i> — сестра папы;
+    <i>Marteni ema</i> — мама Мартена.
+    <i>minu</i> — мой,
+    <i>sinu</i> — твой,
+    <i>tema</i> — его/её,
+    <i>meie</i> — наш,
+    <i>teie</i> — ваш,
+    <i>nende</i> — их.
+  </div>
 </section>
 
 <section class="card">
-<h2>2. Vali õige vastus / Выбери ответ</h2>
-<div id="quiz"></div>
-<p id="qscore" class="feedback"></p>
+  <h2>2. Vali õige vastus / Выбери ответ</h2>
+  <div id="quiz"></div>
+  <p id="qscore" class="feedback" aria-live="polite"></p>
 </section>
 
 <section class="card">
-<h2>3. Täida lüngad / Заполни пропуски</h2>
-<p class="muted">Впиши подходящее слово на эстонском языке.</p>
-<div id="fills"></div>
+  <h2>3. Täida lüngad / Заполни пропуски</h2>
+  <p class="muted">Впиши подходящее слово на эстонском языке.</p>
+  <div id="fills"></div>
 </section>
 
 <section class="card">
-<h2>4. Loe ja vasta / Прочитай и ответь</h2>
-<div class="hint">Minu nimi on Marten. Minu peres on neli inimest: mina, minu ema, minu isa ja minu õde. Minu õde on minust kolm aastat noorem. Minu vanavanemad elavad teises linnas. Me külastame neid nädalavahetusel. Minu emal on üks vend ja minu isal on üks õde.</div>
-<div id="reads"></div>
+  <h2>4. Loe ja vasta / Прочитай и ответь</h2>
+
+  <div class="hint">
+    Minu nimi on Marten. Minu peres on neli inimest: mina, minu ema,
+    minu isa ja minu õde. Minu õde on minust kolm aastat noorem.
+    Minu vanavanemad elavad teises linnas. Me külastame neid
+    nädalavahetusel. Minu emal on üks vend ja minu isal on üks õde.
+  </div>
+
+  <div id="reads"></div>
 </section>
 
 <section class="card">
-<h2>5. Räägi oma perest / Расскажи о семье</h2>
-<p>Напиши 3–5 предложений. Можно придумать семью, если не хочется писать о своей.</p>
-<textarea id="writing" placeholder="Minu peres on ..."></textarea>
-<p class="muted">Свободный текст проверит преподаватель.</p>
+  <h2>5. Räägi oma perest / Расскажи о семье</h2>
+  <p>
+    Напиши 3–5 предложений. Можно придумать семью,
+    если не хочется писать о своей.
+  </p>
+
+  <textarea
+    id="writing"
+    placeholder="Minu peres on ..."
+    aria-label="Рассказ о семье"></textarea>
+
+  <p class="muted">Свободный текст проверит преподаватель.</p>
 </section>
 
 <section class="card">
-<h2>6. Saada vastused õpetajale / Отправь ответы преподавателю</h2>
-<p>Нажми кнопку ниже. Ответы автоматически отправятся преподавателю — почтовое приложение открывать не нужно.</p>
-<button id="sendBtn" type="submit">Отправить ответы</button>
-<p id="status" class="feedback" role="status" aria-live="polite"></p>
-<p class="muted">При первой отправке FormSubmit может прислать преподавателю письмо для подтверждения адреса.</p>
+  <h2>6. Saada vastused õpetajale / Отправь ответы преподавателю</h2>
+
+  <p>
+    Нажми кнопку ниже. Ответы автоматически отправятся преподавателю —
+    почтовое приложение открывать не нужно.
+  </p>
+
+  <button id="sendBtn" type="submit">Отправить ответы</button>
+
+  <p id="status" class="feedback" role="status" aria-live="polite"></p>
+
+  <p class="muted">
+    При первой отправке FormSubmit может прислать преподавателю
+    письмо для подтверждения адреса.
+  </p>
 </section>
+
 </form>
 </main>
 
 <script>
 const quizItems = [
-["„Vanaema” tähendab …", ["бабушка","тётя","дочь"], 0],
-["Ema vend on minu …", ["onu","tädi","vanaisa"], 0],
-["„Minu pere” tähendab …", ["твоя семья","моя семья","их семья"], 1],
-["„Kelle?” küsib …", ["где?","когда?","чей? / кого?"], 2],
-["„Nende vanaema” tähendab …", ["их бабушка","её бабушка","моя бабушка"], 0],
-["„Poeg” on …", ["дочь","сын","супруг"], 1]
+  ["„Vanaema” tähendab …", ["бабушка", "тётя", "дочь"], 0],
+  ["Ema vend on minu …", ["onu", "tädi", "vanaisa"], 0],
+  ["„Minu pere” tähendab …", ["твоя семья", "моя семья", "их семья"], 1],
+  ["„Kelle?” küsib …", ["где?", "когда?", "чей? / кого?"], 2],
+  ["„Nende vanaema” tähendab …", ["их бабушка", "её бабушка", "моя бабушка"], 0],
+  ["„Poeg” on …", ["дочь", "сын", "супруг"], 1]
 ];
 
 const fillItems = [
-["Minu ema ema on minu _____.","vanaema"],
-["Minu isa vend on minu _____.","onu"],
-["Mari ja Peeter on abielus. _____ pere elab Tartus.","nende"],
-["Mul on kaks _____. (дети)","last"],
-["Minu isa õde on minu _____.","tädi"],
-["Jaani õde on Liis. _____ nimi on Liis.","tema"]
+  ["Minu ema ema on minu _____.", "vanaema"],
+  ["Minu isa vend on minu _____.", "onu"],
+  ["Mari ja Peeter on abielus. _____ pere elab Tartus.", "nende"],
+  ["Mul on kaks _____. (дети)", "last"],
+  ["Minu isa õde on minu _____.", "tädi"],
+  ["Jaani õde on Liis. _____ nimi on Liis.", "tema"]
 ];
 
 const readItems = [
-["Mitu inimest on Marteni peres?", ["neli","4"]],
-["Kes on Martenist kolm aastat noorem?", ["õde"]],
-["Kus elavad Marteni vanavanemad?", ["teises linnas"]],
-["Mitu venda on Marteni emal?", ["üks","1"]],
-["Kas Marteni isal on vend või õde?", ["õde"]]
+  ["Mitu inimest on Marteni peres?", ["neli", "4"]],
+  ["Kes on Martenist kolm aastat noorem?", ["õde"]],
+  ["Kus elavad Marteni vanavanemad?", ["teises linnas"]],
+  ["Mitu venda on Marteni emal?", ["üks", "1"]],
+  ["Kas Marteni isal on vend või õde?", ["õde"]]
 ];
 
 const quiz = document.getElementById("quiz");
 
 quizItems.forEach((item, i) => {
   const box = document.createElement("div");
-  box.innerHTML = `<b>${i + 1}. ${item[0]}</b>` +
-    item[1].map((answer, j) =>
-      `<label><input type="radio" name="q${i}" value="${j}"> ${answer}</label>`
-    ).join("");
+
+  const question = document.createElement("b");
+  question.textContent = `${i + 1}. ${item[0]}`;
+  box.appendChild(question);
+
+  item[1].forEach((answer, j) => {
+    const label = document.createElement("label");
+    const radio = document.createElement("input");
+
+    radio.type = "radio";
+    radio.name = `q${i}`;
+    radio.value = j;
+
+    label.appendChild(radio);
+    label.appendChild(document.createTextNode(" " + answer));
+    box.appendChild(label);
+  });
+
   quiz.appendChild(box);
 
   if (i < quizItems.length - 1) {
@@ -128,19 +566,32 @@ quizItems.forEach((item, i) => {
 const fills = document.getElementById("fills");
 
 fillItems.forEach((item, i) => {
-  fills.insertAdjacentHTML(
-    "beforeend",
-    `<label>${i + 1}. ${item[0]}<input id="f${i}" type="text" autocomplete="off"></label>`
-  );
+  const label = document.createElement("label");
+  label.appendChild(document.createTextNode(`${i + 1}. ${item[0]}`));
+
+  const input = document.createElement("input");
+  input.id = `f${i}`;
+  input.type = "text";
+  input.autocomplete = "off";
+  input.setAttribute("aria-label", `Пропуск ${i + 1}`);
+
+  label.appendChild(input);
+  fills.appendChild(label);
 });
 
 const reads = document.getElementById("reads");
 
 readItems.forEach((item, i) => {
-  reads.insertAdjacentHTML(
-    "beforeend",
-    `<label>${i + 1}. ${item[0]}<input id="r${i}" type="text"></label>`
-  );
+  const label = document.createElement("label");
+  label.appendChild(document.createTextNode(`${i + 1}. ${item[0]}`));
+
+  const input = document.createElement("input");
+  input.id = `r${i}`;
+  input.type = "text";
+  input.setAttribute("aria-label", `Ответ по тексту ${i + 1}`);
+
+  label.appendChild(input);
+  reads.appendChild(label);
 });
 
 function scoreQuiz() {
@@ -148,111 +599,141 @@ function scoreQuiz() {
   const lines = [];
 
   quizItems.forEach((item, i) => {
-    const answer = document.querySelector(`input[name="q${i}"]:checked`);
+    const answer = document.querySelector(
+      `input[name="q${i}"]:checked`
+    );
 
     if (answer && Number(answer.value) === item[2]) {
       score++;
     }
 
     lines.push(
-      `${i + 1}. ${answer ? item[1][Number(answer.value)] : "(без ответа)"}`
+      `${i + 1}. ${
+        answer
+          ? item[1][Number(answer.value)]
+          : "(без ответа)"
+      }`
     );
   });
 
   const scoreElement = document.getElementById("qscore");
-  scoreElement.textContent = `Правильных ответов: ${score}/${quizItems.length}`;
-  scoreElement.className = "feedback " + (score >= 5 ? "good" : "bad");
 
-  return { score, lines: lines.join("\n") };
+  scoreElement.textContent =
+    `Правильных ответов: ${score}/${quizItems.length}`;
+
+  scoreElement.className =
+    "feedback " + (score >= 5 ? "good" : "bad");
+
+  return {
+    score,
+    lines: lines.join("\n")
+  };
 }
 
-// Отправка через FormSubmit AJAX на почту преподавателя.
+// FormSubmit AJAX: отправка ответов на почту преподавателя.
 // При первой отправке сервис может потребовать подтверждение адреса.
-const FORM_ENDPOINT = "https://formsubmit.co/ajax/glorrass@gmail.com";
+const FORM_ENDPOINT =
+  "https://formsubmit.co/ajax/glorrass@gmail.com";
 
-document.getElementById("lessonForm").addEventListener("submit", async function(e) {
-  e.preventDefault();
+document.getElementById("lessonForm").addEventListener(
+  "submit",
+  async function(e) {
+    e.preventDefault();
 
-  const name =
-    document.getElementById("studentName").value.trim() || "Имя не указано";
+    const name =
+      document.getElementById("studentName").value.trim() ||
+      "Имя не указано";
 
-  const quizResult = scoreQuiz();
+    const quizResult = scoreQuiz();
 
-  const fillAnswers = fillItems.map((item, i) =>
-    `${i + 1}. ${document.getElementById("f" + i).value.trim() || "(без ответа)"}`
-  ).join("\n");
+    const fillAnswers = fillItems.map((item, i) =>
+      `${i + 1}. ${
+        document.getElementById("f" + i).value.trim() ||
+        "(без ответа)"
+      }`
+    ).join("\n");
 
-  const readAnswers = readItems.map((item, i) =>
-    `${i + 1}. ${document.getElementById("r" + i).value.trim() || "(без ответа)"}`
-  ).join("\n");
+    const readAnswers = readItems.map((item, i) =>
+      `${i + 1}. ${
+        document.getElementById("r" + i).value.trim() ||
+        "(без ответа)"
+      }`
+    ).join("\n");
 
-  const answers = [
-    `Ученик: ${name}`,
-    `Тема: Perekond ja sugulased`,
-    `Результат теста: ${quizResult.score}/${quizItems.length}`,
-    "",
-    "Выбор ответов:",
-    quizResult.lines,
-    "",
-    "Заполни пропуски:",
-    fillAnswers,
-    "",
-    "Ответы по тексту:",
-    readAnswers,
-    "",
-    "Рассказ о семье:",
-    document.getElementById("writing").value.trim() || "(без ответа)"
-  ].join("\n");
+    const answers = [
+      `Ученик: ${name}`,
+      "Тема: Perekond ja sugulased",
+      `Результат теста: ${quizResult.score}/${quizItems.length}`,
+      "",
+      "Выбор ответов:",
+      quizResult.lines,
+      "",
+      "Заполни пропуски:",
+      fillAnswers,
+      "",
+      "Ответы по тексту:",
+      readAnswers,
+      "",
+      "Рассказ о семье:",
+      document.getElementById("writing").value.trim() ||
+        "(без ответа)"
+    ].join("\n");
 
-  const status = document.getElementById("status");
-  const button = document.getElementById("sendBtn");
+    const status = document.getElementById("status");
+    const button = document.getElementById("sendBtn");
 
-  button.disabled = true;
-  status.textContent = "Отправляем ответы…";
-  status.className = "feedback";
+    button.disabled = true;
+    status.textContent = "Отправляем ответы…";
+    status.className = "feedback";
 
-  const payload = {
-    name: name,
-    _subject: `Ответы ученика — Perekond (${name})`,
-    answers: answers,
-    _captcha: "false"
-  };
+    const payload = {
+      name: name,
+      _subject: `Ответы ученика — Perekond (${name})`,
+      answers: answers,
+      _captcha: "false"
+    };
 
-  try {
-    const response = await fetch(FORM_ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(payload)
-    });
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
 
-    const result = await response.json();
+      const result = await response.json();
 
-    if (
-      !response.ok ||
-      result.success === false ||
-      result.success === "false" ||
-      result.error
-    ) {
-      throw new Error(result.message || result.error || "Submission failed");
+      if (
+        !response.ok ||
+        result.success === false ||
+        result.success === "false" ||
+        result.error
+      ) {
+        throw new Error(
+          result.message || result.error || "Submission failed"
+        );
+      }
+
+      status.textContent =
+        "Готово! Ответы отправлены преподавателю. / Vastused on saadetud!";
+
+      status.className = "feedback good";
+
+    } catch (error) {
+      console.error("Submission error:", error);
+
+      status.textContent =
+        "Не удалось отправить ответы. Попробуй ещё раз или сообщи преподавателю.";
+
+      status.className = "feedback bad";
+
+    } finally {
+      button.disabled = false;
     }
-
-    status.textContent =
-      "Готово! Ответы отправлены преподавателю. / Vastused on saadetud!";
-    status.className = "feedback good";
-
-  } catch (error) {
-    console.error("Submission error:", error);
-    status.textContent =
-      "Не удалось отправить ответы. Попробуй ещё раз или сообщи преподавателю.";
-    status.className = "feedback bad";
-
-  } finally {
-    button.disabled = false;
   }
-});
+);
 </script>
 </body>
 </html>
