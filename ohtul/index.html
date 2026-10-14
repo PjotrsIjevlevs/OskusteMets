@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0B1714">
+<title>OskusteMets — Õhtul: tegusõnad ja perekond</title>
+<style>
+:root {
+  --bg:#0B1714; --panel:#14251F; --panel2:#1F493A;
+  --mint:#55B89A; --pale:#C5D8CC; --cream:#E7F0E9;
+  --muted:#9BB6A8; --line:rgba(197,216,204,.18);
+}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  background:radial-gradient(ellipse at 50% -10%,#245341 0,transparent 45%),
+    linear-gradient(180deg,#0B1714,#0D1D18 45%,#09120F);
+  color:var(--cream);
+  font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+body:before {
+  content:""; position:fixed; inset:0; pointer-events:none; opacity:.23;
+  background-image:radial-gradient(#d6f2e3 .7px,transparent .7px);
+  background-size:41px 41px;
+}
+header,main,footer { position:relative; z-index:1; }
+header { padding:28px 18px 12px; text-align:center; }
+.brand {
+  letter-spacing:.24em; text-transform:uppercase;
+  font:600 12px Georgia,serif; color:var(--mint);
+}
+h1,h2,h3 { font-family:Georgia,"Times New Roman",serif; font-weight:500; line-height:1.2; }
+h1 { font-size:clamp(2rem,6vw,3.4rem); margin:12px 0 8px; }
+h2 { font-size:1.55rem; margin:5px 0 12px; }
+.subtitle { max-width:660px; margin:0 auto; color:var(--pale); }
+.motif { width:160px; height:1px; background:linear-gradient(90deg,transparent,var(--mint),transparent); margin:22px auto; }
+main { width:min(900px, calc(100% - 28px)); margin:12px auto 60px; }
+.notice { border:1px solid var(--line); background:rgba(20,37,31,.85); border-radius:16px; padding:15px 17px; color:var(--pale); font-size:.93rem; }
+.progress-wrap { margin:18px 0 24px; }
+.progress-label { display:flex; justify-content:space-between; color:var(--muted); font-size:.85rem; margin-bottom:7px; }
+.progress { height:6px; border-radius:10px; background:#223A30; overflow:hidden; }
+.progress span { display:block; width:0; height:100%; background:linear-gradient(90deg,var(--mint),#C5D8CC); transition:width .25s; }
+section { margin:18px 0; background:linear-gradient(145deg,rgba(20,37,31,.97),rgba(14,29,23,.97)); border:1px solid var(--line); border-radius:18px; padding:clamp(17px,4vw,27px); box-shadow:0 12px 34px #0002; }
+.section-kicker { color:var(--mint); text-transform:uppercase; letter-spacing:.16em; font-size:.72rem; font-weight:700; }
+p { margin:8px 0 13px; }
+.small { font-size:.9rem; color:var(--muted); }
+label.question { display:block; margin:17px 0 7px; color:var(--pale); font-weight:600; }
+input[type=text],textarea,select {
+  width:100%; background:#0B1714; color:var(--cream);
+  border:1px solid #355748; border-radius:10px; padding:12px 13px;
+  font:inherit; outline:none;
+}
+input:focus,textarea:focus,select:focus { border-color:var(--mint); box-shadow:0 0 0 3px #55b89a20; }
+textarea { min-height:84px; resize:vertical; }
+.grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.task { padding:12px 0; border-bottom:1px solid var(--line); }
+.task:last-child { border-bottom:0; }
+.task p { margin:0 0 8px; }
+.choice { display:inline-flex; align-items:center; gap:7px; border:1px solid #355748; border-radius:999px; padding:7px 11px; color:var(--pale); margin:4px 2px; }
+.choice:has(input:checked) { border-color:var(--mint); background:#55b89a18; }
+input[type=checkbox] { accent-color:var(--mint); }
+button {
+  font:inherit; cursor:pointer; border:1px solid var(--mint); border-radius:999px;
+  padding:12px 18px; background:var(--mint); color:#0B1714; font-weight:750;
+}
+button.secondary { background:transparent; color:var(--pale); border-color:#426554; }
+.actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+.feedback { margin-top:12px; padding:12px; border-radius:10px; display:none; }
+.feedback.show { display:block; }
+.feedback.good { background:#173A2C; color:#B8F0D7; border:1px solid #2E7658; }
+.feedback.warn { background:#3B2924; color:#F4C0B4; border:1px solid #855447; }
+.reading { font-family:Georgia,serif; font-size:1.06rem; line-height:1.9; color:#E3EDE5; border-left:2px solid var(--mint); padding-left:17px; margin:18px 0; }
+details { border-top:1px solid var(--line); padding:12px 0; }
+summary { cursor:pointer; color:var(--mint); font-weight:650; }
+footer { text-align:center; color:var(--muted); padding:20px; font-size:.85rem; }
+@media(max-width:620px) {
+  .grid2 { grid-template-columns:1fr; }
+  header { padding-top:22px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">✦ OskusteMets · Eesti keel ✦</div>
+  <h1>Õhtul</h1>
+  <p class="subtitle">Tegusõnad, perekond ja igapäevane rutiin</p>
+  <div class="motif"></div>
+  <p class="small">Iseseisev töö · umbes 35–50 minutit</p>
+</header>
+
+<main>
+  <div class="notice">Tere! Täida ülesanded rahulikult. Kõigepealt proovi ise; pärast saad vastused kontrollida. Kui kõigeks aega ei jätku, kirjuta kõige olulisemad vastused lõpuni.</div>
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Sinu edenemine</span><span id="progressText">0% täidetud</span></div>
+    <div class="progress"><span id="progressBar"></span></div>
+  </div>
+
+  <form id="lessonForm">
+    <section>
+      <div class="section-kicker">01 · Soojendus</div><h2>Mida sa õhtul teed?</h2>
+      <p class="small">Vasta eesti keeles. Kirjuta täislaused.</p>
+      <label class="question" for="warm1">1. Mis kell sa tavaliselt õhtust sööd?</label><input id="warm1" name="Soojendus 1" type="text">
+      <label class="question" for="warm2">2. Mida sa teed pärast tööd või kooli?</label><input id="warm2" name="Soojendus 2" type="text">
+      <label class="question" for="warm3">3. Kas sa loed õhtul raamatut?</label><input id="warm3" name="Soojendus 3" type="text">
+      <label class="question" for="warm4">4. Millal sa tavaliselt magama lähed?</label><input id="warm4" name="Soojendus 4" type="text">
+    </section>
+
+    <section>
+      <div class="section-kicker">02 · Tegusõnad</div><h2>Leia õige vorm</h2>
+      <p>Kirjuta lünka sobiv olevikuvorm.</p>
+      <div class="task"><p>1. Mina __________ kell 23.00 magama. (minema)</p><input name="Tegusõnad 1" type="text"></div>
+      <div class="task"><p>2. Õhtul laps __________ hästi. (magama)</p><input name="Tegusõnad 2" type="text"></div>
+      <div class="task"><p>3. Tund __________ kell kuus. (lõppema)</p><input name="Tegusõnad 3" type="text"></div>
+      <div class="task"><p>4. Kevadel __________ aias lilled. (kasvama)</p><input name="Tegusõnad 4" type="text"></div>
+      <div class="task"><p>5. Film __________ kell kaheksa. (algama)</p><input name="Tegusõnad 5" type="text"></div>
+      <div class="task"><p>6. Minu vanemad __________ abielus. (olema)</p><input name="Tegusõnad 6" type="text"></div>
+      <div class="task"><p>7. Meie kass __________ terve päeva. (magama)</p><input name="Tegusõnad 7" type="text"></div>
+      <div class="task"><p>8. Millal kontsert __________? (algama)</p><input name="Tegusõnad 8" type="text"></div>
+      <div class="task"><p>9. Lapsed __________ koolis palju uusi asju. (õppima)</p><input name="Tegusõnad 9" type="text"></div>
+      <div class="task"><p>10. Millal sa tööle __________? (hakkama)</p><input name="Tegusõnad 10" type="text"></div>
+      <div class="task"><p>11. Sügisel __________ mõned lilled. (surema)</p><input name="Tegusõnad 11" type="text"></div>
+    </section>
+
+    <section>
+      <div class="section-kicker">03 · Isik ja vorm</div><h2>Kirjuta õige olevikuvorm</h2>
+      <p class="small">Näide: mina lähen, tema läheb.</p>
+      <div class="grid2">
+        <div><label class="question">1. mina — hakkama</label><input name="Isik 1" type="text"></div>
+        <div><label class="question">2. sina — kasvama</label><input name="Isik 2" type="text"></div>
+        <div><label class="question">3. tema — magama</label><input name="Isik 3" type="text"></div>
+        <div><label class="question">4. meie — olema</label><input name="Isik 4" type="text"></div>
+        <div><label class="question">5. teie — minema</label><input name="Isik 5" type="text"></div>
+        <div><label class="question">6. nemad — õppima</label><input name="Isik 6" type="text"></div>
+        <div><label class="question">7. mina — olema (abielus)</label><input name="Isik 7" type="text"></div>
+        <div><label class="question">8. tema — hakkama</label><input name="Isik 8" type="text"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-kicker">04 · Lugemine</div><h2>Õhtu perekonnas</h2>
+      <div class="reading">On õhtu. Mari tuleb kell kuus koju. Tema vend Joonas õpib oma toas ja õde Liis loeb raamatut. Ema valmistab õhtusööki. Isa on elutoas ja kuulab muusikat. Vanaema helistab kell seitse. Ta küsib: „Kuidas teil läheb?” Mari vastab: „Hästi! Me oleme kodus. Joonas õpib, Liis loeb ja ema teeb süüa.” Pärast õhtusööki jalutavad Mari ja isa pargis. Ilm on jahe, aga taevas on selge. Kell kümme lähevad lapsed magama. Ema ja isa loevad veel natuke.</div>
+      <p class="small">Vasta täislausetega.</p>
+      <label class="question">1. Mis kell Mari koju tuleb?</label><input name="Lugemine 1" type="text">
+      <label class="question">2. Mida Joonas teeb?</label><input name="Lugemine 2" type="text">
+      <label class="question">3. Mida Liis teeb?</label><input name="Lugemine 3" type="text">
+      <label class="question">4. Millal vanaema helistab?</label><input name="Lugemine 4" type="text">
+      <label class="question">5. Kus Mari ja isa pärast õhtusööki jalutavad?</label><input name="Lugemine 5" type="text">
+      <label class="question">6. Mis kell lapsed magama lähevad?</label><input name="Lugemine 6" type="text">
+      <label class="question">7. Mida teevad ema ja isa enne magamaminekut?</label><input name="Lugemine 7" type="text">
+    </section>
+
+    <section>
+      <div class="section-kicker">05 · Perekond</div><h2>Kelle oma?</h2>
+      <p>Kirjuta sobiv vorm. Näide: mina → minu.</p>
+      <div class="task"><p>1. See on __________ auto. (mina)</p><input name="Kelle 1" type="text"></div>
+      <div class="task"><p>2. Need on __________ raamatud. (õpetaja)</p><input name="Kelle 2" type="text"></div>
+      <div class="task"><p>3. See on __________ koer. (tema)</p><input name="Kelle 3" type="text"></div>
+      <div class="task"><p>4. Need on __________ lilled. (meie)</p><input name="Kelle 4" type="text"></div>
+      <div class="task"><p>5. See on __________ maja. (vanaema)</p><input name="Kelle 5" type="text"></div>
+      <div class="task"><p>6. Need on __________ sõbrad. (nemad)</p><input name="Kelle 6" type="text"></div>
+      <div class="task"><p>7. See on __________ tütar. (Peeter)</p><input name="Kelle 7" type="text"></div>
+      <div class="task"><p>8. Need on __________ vanemad. (sina)</p><input name="Kelle 8" type="text"></div>
+    </section>
+
+    <section>
+      <div class="section-kicker">06 · Paranda vead</div><h2>Leia viga ja kirjuta lause õigesti</h2>
+      <label class="question">1. Lapsed magab õhtul kodus.</label><input name="Vead 1" type="text">
+      <label class="question">2. Minu ema ja isa on abielus olla.</label><input name="Vead 2" type="text">
+      <label class="question">3. Mari lähevad kell kümme magama.</label><input name="Vead 3" type="text">
+      <label class="question">4. Aias kasvavad vana pirnipuu.</label><input name="Vead 4" type="text">
+      <label class="question">5. Tund algavad kell üheksa.</label><input name="Vead 5" type="text">
+      <label class="question">6. Need on minu vend auto.</label><input name="Vead 6" type="text">
+    </section>
+
+    <section>
+      <div class="section-kicker">07 · Aastaajad ja ilm</div><h2>Vali sobiv sõna</h2>
+      <p class="small">Kasuta: talvel, suvel, kevadel, sügisel, külm, soe, sajab, kasvavad.</p>
+      <label class="question">1. __________ on sageli lumi maas.</label><input name="Aastaajad 1" type="text">
+      <label class="question">2. __________ on päevad pikad ja ilm soe.</label><input name="Aastaajad 2" type="text">
+      <label class="question">3. __________ __________ aias lilled.</label><input name="Aastaajad 3" type="text">
+      <label class="question">4. __________ langevad puulehed.</label><input name="Aastaajad 4" type="text">
+      <label class="question">5. Täna on __________. Ma panen jope selga.</label><input name="Aastaajad 5" type="text">
+      <label class="question">6. Väljas __________ vihma.</label><input name="Aastaajad 6" type="text">
+    </section>
+
+    <section>
+      <div class="section-kicker">08 · Küsimused</div><h2>Moodusta küsimus</h2>
+      <label class="question">1. Vastus: Ma lähen magama kell kümme.</label><input name="Küsimus 1" type="text">
+      <label class="question">2. Vastus: Minu õde loeb raamatut.</label><input name="Küsimus 2" type="text">
+      <label class="question">3. Vastus: Vanaema helistab kell seitse.</label><input name="Küsimus 3" type="text">
+      <label class="question">4. Vastus: Me jalutame pargis.</label><input name="Küsimus 4" type="text">
+      <label class="question">5. Vastus: Minu vanemad on abielus.</label><input name="Küsimus 5" type="text">
+    </section>
+
+    <section>
+      <div class="section-kicker">09 · Kirjutamine</div><h2>Minu õhtu</h2>
+      <p>Kirjuta 6–8 lauset oma tavalisest õhtust. Kasuta vähemalt viit tegusõna: minema, tegema, lugema, õppima, sööma, hakkama, magama, olema. Lisa vähemalt üks kellaaeg ja üks lause oma perekonna või sõbra kohta.</p>
+      <textarea name="Kirjutamine" placeholder="Minu õhtu algab tavaliselt kell..."></textarea>
+    </section>
+
+    <section>
+      <div class="section-kicker">10 · Enesekontroll</div><h2>Kuidas läks?</h2>
+      <label class="choice"><input type="checkbox" name="Enesekontroll" value="Oskan olevikuvorme"> Oskan kasutada olevikuvorme</label>
+      <label class="choice"><input type="checkbox" name="Enesekontroll" value="Saan tekstist aru"> Saan lugemistekstist aru</label>
+      <label class="choice"><input type="checkbox" name="Enesekontroll" value="Oskan rääkida õhtust"> Oskan rääkida õhtusest rutiinist</label>
+      <label class="choice"><input type="checkbox" name="Enesekontroll" value="Oskan moodustada küsimusi"> Oskan moodustada küsimusi</label>
+      <label class="question" for="studentName">Sinu nimi</label><input id="studentName" name="Õpilase nimi" type="text" required>
+      <label class="question" for="studentNotes">Küsimus õpetajale (soovi korral)</label><textarea id="studentNotes" name="Küsimus õpetajale"></textarea>
+      <div class="actions">
+        <button type="button" id="checkBtn">Kontrolli vastuseid</button>
+        <button type="submit">Saada vastused õpetajale</button>
+        <button type="button" class="secondary" id="saveBtn">Laadi vastused alla (.txt)</button>
+      </div>
+      <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+      <p class="small">Vastused saadetakse õpetajale e-posti teel. Ära sulge lehte enne kinnitust.</p>
+    </section>
+  </form>
+
+  <section>
+    <div class="section-kicker">Õpetaja abimaterjal</div><h2>Vastuste kontroll</h2>
+    <p class="small">Ava pärast ülesannete lahendamist.</p>
+    <details><summary>Tegusõnad ja isikuvormid</summary>
+      <p>1. lähen; 2. magab; 3. lõpeb; 4. kasvavad; 5. algab; 6. on; 7. magab; 8. algab; 9. õpivad; 10. hakkad; 11. surevad.</p>
+      <p>Isikuvormid: mina hakkan; sina kasvad; tema magab; meie oleme; teie lähete; nemad õpivad; mina olen abielus; tema hakkab.</p>
+    </details>
+    <details><summary>Lugemine</summary>
+      <p>1. Mari tuleb koju kell kuus. 2. Joonas õpib oma toas. 3. Liis loeb raamatut. 4. Vanaema helistab kell seitse. 5. Nad jalutavad pargis. 6. Lapsed lähevad magama kell kümme. 7. Ema ja isa loevad veel natuke.</p>
+    </details>
+    <details><summary>Kelle oma?</summary>
+      <p>1. minu; 2. õpetaja; 3. tema; 4. meie; 5. vanaema; 6. nende; 7. Peetri; 8. sinu.</p>
+    </details>
+    <details><summary>Paranda vead</summary>
+      <p>1. Lapsed magavad õhtul kodus. 2. Minu ema ja isa on abielus. 3. Mari läheb kell kümme magama. 4. Aias kasvab vana pirnipuu. 5. Tund algab kell üheksa. 6. See on minu venna auto.</p>
+    </details>
+    <details><summary>Aastaajad — võimalikud vastused</summary>
+      <p>1. Talvel; 2. Suvel; 3. Kevadel kasvavad; 4. Sügisel; 5. külm; 6. sajab.</p>
+    </details>
+  </section>
+</main>
+<footer>OskusteMets · Eesti keel · Metsavaikne õppimine ✦</footer>
+
+<script>
+const form = document.getElementById('lessonForm');
+
+function updateProgress() {
+  const fields = [...form.querySelectorAll('input:not([type=checkbox]),textarea,select')];
+  const done = fields.filter(el => el.value.trim()).length;
+  const pct = Math.round(done / Math.max(fields.length, 1) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressText').textContent = pct + '% täidetud';
+}
+
+form.addEventListener('input', updateProgress);
+
+document.getElementById('checkBtn').addEventListener('click', () => {
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback show good';
+  fb.textContent = 'Vastuste näidised leiad lehe allosas jaotisest „Vastuste kontroll”. Ava see pärast iseseisvat lahendamist.';
+  document.querySelector('details').scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+document.getElementById('saveBtn').addEventListener('click', () => {
+  const data = new FormData(form);
+  const lines = ['OskusteMets — Õhtul', ''];
+  for (const [key, value] of data.entries()) lines.push(key + ': ' + value);
+  const blob = new Blob([lines.join('\n')], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'oskustemets-ohtul-vastused.txt';
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!form.reportValidity()) return;
+
+  const fb = document.getElementById('feedback');
+  const btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'Saadan…';
+
+  const data = new FormData(form);
+  data.append('_subject', 'OskusteMets — Õhtul: õpilase vastused');
+  data.append('_template', 'table');
+
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/glorrass@gmail.com', {
+      method:'POST', body:data, headers:{'Accept':'application/json'}
+    });
+    const json = await res.json();
+    if (res.ok && (json.success === true || json.success === 'true')) {
+      fb.className = 'feedback show good';
+      fb.textContent = 'Aitäh! Vastused on saadetud õpetajale.';
+      form.reset();
+      updateProgress();
+    } else {
+      throw new Error('Submission failed');
+    }
+  } catch (err) {
+    fb.className = 'feedback show warn';
+    fb.textContent = 'Automaatne saatmine ei õnnestunud. Laadi vastused alla (.txt) ja saada õpetajale e-postiga. Kui FormSubmit pole veel aktiveeritud, kontrolli e-posti teel saadetud kinnituskirja.';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Saada vastused õpetajale';
+  }
+});
+
+updateProgress();
+</script>
+</body>
+</html>
