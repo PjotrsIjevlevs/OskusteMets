@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0B1714">
+<title>OskusteMets — Esimene kohtumine</title>
+
+<style>
+:root {
+  --bg:#0b1714;
+  --panel:#14251f;
+  --green:#1f493a;
+  --mint:#55b89a;
+  --pale:#c5d8cc;
+  --white:#e7f0e9;
+  --line:#315447;
+  --gold:#e6c88b;
+  --red:#ffb4a8;
+}
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  background:radial-gradient(ellipse at top,#1b3b30,#0b1714 65%);
+  color:var(--white);
+  font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+main { max-width:800px; margin:auto; padding:18px 14px 45px; }
+
+header,section {
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:var(--panel);
+  padding:22px;
+  margin-bottom:16px;
+}
+header {
+  background:linear-gradient(135deg,#1f493a,#14251f 70%);
+  position:relative;
+  overflow:hidden;
+}
+.kicker {
+  color:var(--mint);
+  font-size:.78rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:800;
+}
+h1,h2 { font-family:Georgia,serif; line-height:1.2; }
+h1 { font-size:clamp(2rem,7vw,3rem); margin:8px 0; }
+h2 { font-size:1.4rem; margin:0 0 12px; }
+p { margin:8px 0; }
+.ru { color:var(--pale); }
+.est { font-size:1.2rem; color:#fff; font-weight:750; }
+.small { font-size:.9rem; color:var(--pale); }
+
+.card {
+  background:#0d1c17;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:13px;
+  margin:10px 0;
+}
+input[type=text] {
+  width:100%;
+  padding:11px;
+  border:1px solid #527665;
+  background:#0b1714;
+  color:white;
+  border-radius:9px;
+  font:inherit;
+  margin:5px 0 12px;
+}
+button {
+  background:var(--mint);
+  color:#0b1714;
+  border:0;
+  border-radius:10px;
+  padding:11px 15px;
+  font-weight:800;
+  font-size:1rem;
+  cursor:pointer;
+}
+button.alt {
+  background:#263e34;
+  color:var(--white);
+  border:1px solid #527665;
+}
+button:disabled { opacity:.6; cursor:wait; }
+.options { display:grid; gap:8px; margin:10px 0; }
+label.opt {
+  display:flex;
+  gap:9px;
+  align-items:center;
+  background:#0d1c17;
+  border:1px solid var(--line);
+  padding:10px;
+  border-radius:10px;
+  cursor:pointer;
+}
+input[type=radio] { accent-color:var(--mint); }
+.feedback { color:var(--gold); margin-top:10px; min-height:22px; }
+.success { color:#91dfb5; }
+.error { color:var(--red); }
+.buttons { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+footer { text-align:center; color:var(--pale); font-size:.85rem; }
+
+@media(max-width:560px) {
+  header,section { padding:17px; }
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<header>
+  <div class="kicker">OskusteMets · Eesti keel</div>
+  <h1>Tere! Minu nimi on…</h1>
+  <p>Привет! Сегодня мы познакомимся с эстонским языком.</p>
+  <p class="ru">
+    Не переживай, если пока ничего не понятно. Пробуй угадать,
+    повторять и выбирать. Ошибки здесь совершенно нормальны.
+  </p>
+</header>
+
+<form id="lessonForm">
+
+<section>
+  <h2>1. Tere! — Привет! <span class="small">· 2 минуты</span></h2>
+  <p class="est">Tere! · Tere hommikust! · Head aega! · Nägemist!</p>
+  <p class="ru">Прочитай слова вслух. Попробуй угадать, что они означают.</p>
+
+  <div class="card"><b>Tere!</b> — привет / здравствуйте</div>
+  <div class="card"><b>Tere hommikust!</b> — доброе утро</div>
+  <div class="card"><b>Head aega!</b> — до свидания</div>
+  <div class="card"><b>Nägemist!</b> — до свидания (увидимся)</div>
+
+  <p><b>Выбери правильный ответ:</b> Что ты скажешь человеку, когда встречаешь его?</p>
+  <div class="options">
+    <label class="opt"><input type="radio" name="greet" value="a"> Head aega!</label>
+    <label class="opt"><input type="radio" name="greet" value="b"> Tere!</label>
+    <label class="opt"><input type="radio" name="greet" value="c"> Nägemist!</label>
+  </div>
+  <button type="button" class="alt" onclick="checkGreeting()">Проверить</button>
+  <div id="greetFeedback" class="feedback" aria-live="polite"></div>
+</section>
+
+<section>
+  <h2>2. Kuidas sinu nimi on? <span class="small">· 3 минуты</span></h2>
+
+  <p class="est">Tere! Minu nimi on Anna.</p>
+  <p class="ru">Привет! Меня зовут Анна.</p>
+  <p class="est">Mis sinu nimi on?</p>
+  <p class="ru">Как тебя зовут?</p>
+
+  <p>Попробуй закончить предложения. Можно написать своё имя латиницей.</p>
+
+  <label for="name1">Minu nimi on… — Меня зовут…</label>
+  <input id="name1" name="Имя" type="text" placeholder="Напиши своё имя">
+
+  <label for="name2">Mina olen… — Я… / Я являюсь…</label>
+  <input id="name2" name="Представление" type="text" placeholder="Имя или национальность, если знаешь">
+
+  <p class="small">
+    Подсказка: <b>minu</b> = мой/моя;
+    <b>nimi</b> = имя; <b>mina</b> = я;
+    <b>olen</b> = есть / являюсь.
+  </p>
+</section>
+
+<section>
+  <h2>3. Olen või oled? <span class="small">· 3 минуты</span></h2>
+  <p class="ru">Глагол <b>olema</b> означает «быть».</p>
+
+  <div class="card"><span class="est">Mina olen</span> — я есть / я являюсь</div>
+  <div class="card"><span class="est">Sina oled</span> — ты есть / ты являешься</div>
+  <div class="card"><span class="est">Tema on</span> — он / она есть</div>
+
+  <p><b>Выбери слово, которое подходит:</b></p>
+
+  <p>1. Mina ___ Anna.</p>
+  <div class="options">
+    <label class="opt"><input type="radio" name="verb1" value="olen"> olen</label>
+    <label class="opt"><input type="radio" name="verb1" value="oled"> oled</label>
+    <label class="opt"><input type="radio" name="verb1" value="on"> on</label>
+  </div>
+
+  <p>2. Sina ___ uus õpilane. — Ты новый ученик / новая ученица.</p>
+  <div class="options">
+    <label class="opt"><input type="radio" name="verb2" value="olen"> olen</label>
+    <label class="opt"><input type="radio" name="verb2" value="oled"> oled</label>
+    <label class="opt"><input type="radio" name="verb2" value="on"> on</label>
+  </div>
+
+  <button type="button" class="alt" onclick="checkVerbs()">Проверить</button>
+  <div id="verbFeedback" class="feedback" aria-live="polite"></div>
+</section>
+
+<section>
+  <h2>4. Kus sa elad? <span class="small">· 3 минуты</span></h2>
+
+  <p class="est">Kus sa elad?</p>
+  <p class="ru">Где ты живёшь?</p>
+  <p class="est">Ma elan Portugalis.</p>
+  <p class="ru">Я живу в Португалии.</p>
+
+  <p class="small">
+    <b>ma</b> = я; <b>elan</b> = живу; <b>Kus?</b> = где?
+  </p>
+
+  <label for="country">Ma elan… — Я живу…</label>
+  <input id="country" name="Место проживания" type="text" placeholder="Например: Portugalis">
+
+  <p>Какой вопрос означает «Где ты живёшь?»</p>
+  <div class="options">
+    <label class="opt"><input type="radio" name="where" value="a"> Mis sinu nimi on?</label>
+    <label class="opt"><input type="radio" name="where" value="b"> Kus sa elad?</label>
+    <label class="opt"><input type="radio" name="where" value="c"> Head aega!</label>
+  </div>
+
+  <button type="button" class="alt" onclick="checkWhere()">Проверить</button>
+  <div id="whereFeedback" class="feedback" aria-live="polite"></div>
+</section>
+
+<section>
+  <h2>5. Мини-знакомство <span class="small">· 2–4 минуты</span></h2>
+  <p class="ru">
+    Представься по-эстонски. Используй то, что запомнила.
+    Можно посмотреть на подсказки.
+  </p>
+
+  <div class="card">
+    <p class="est">Tere!</p>
+    <p class="est">Minu nimi on ______.</p>
+    <p class="est">Ma elan ______.</p>
+    <p class="est">Head aega!</p>
+  </div>
+
+  <label for="intro">Попробуй написать своё знакомство целиком</label>
+  <input id="intro" name="Знакомство" type="text" placeholder="Tere! Minu nimi on…">
+
+  <p class="small">
+    На уроке мы вместе прочитаем ответы и разберём произношение.
+  </p>
+
+  <div class="buttons">
+    <button type="button" onclick="finish()">Закончить разминку</button>
+    <button type="button" class="alt" id="sendButton" onclick="sendAnswers()">Отправить ответы преподавателю</button>
+  </div>
+
+  <div id="finishFeedback" class="feedback" aria-live="polite"></div>
+</section>
+
+</form>
+
+<footer>
+  OskusteMets · Iga uus sõna on väike samm.
+  <br>Каждое новое слово — маленький шаг.
+</footer>
+
+</main>
+
+<script>
+function selected(name) {
+  const x = document.querySelector(
+    'input[name="' + name + '"]:checked'
+  );
+  return x ? x.value : '';
+}
+
+function checkGreeting() {
+  document.getElementById('greetFeedback').textContent =
+    selected('greet') === 'b'
+      ? 'Õige! Tere! — Правильно!'
+      : 'Попробуй ещё раз. При встрече говорят Tere!';
+}
+
+function checkVerbs() {
+  let n = 0;
+  if (selected('verb1') === 'olen') n++;
+  if (selected('verb2') === 'oled') n++;
+
+  document.getElementById('verbFeedback').textContent =
+    'Результат: ' + n + '/2. Правильно: Mina olen; Sina oled.';
+}
+
+function checkWhere() {
+  document.getElementById('whereFeedback').textContent =
+    selected('where') === 'b'
+      ? 'Õige! Kus sa elad? — Где ты живёшь?'
+      : 'Подсказка: Kus означает «где». Попробуй ещё раз.';
+}
+
+function finish() {
+  const name = document.getElementById('name1').value.trim();
+  const home = document.getElementById('country').value.trim();
+
+  document.getElementById('finishFeedback').textContent =
+    'Tubli! Отличная работа! ' +
+    (name ? 'Имя: ' + name + '. ' : '') +
+    (home ? 'Место проживания: ' + home + '. ' : '') +
+    'Не забудь отправить ответы преподавателю.';
+}
+
+async function sendAnswers() {
+  const button = document.getElementById('sendButton');
+  const feedback = document.getElementById('finishFeedback');
+
+  const answers = {
+    _subject: 'OskusteMets — пробная разминка по эстонскому',
+    _template: 'table',
+    _captcha: 'false',
+    Приветствие: selected('greet') || '(нет ответа)',
+    Имя: document.getElementById('name1').value.trim(),
+    Представление: document.getElementById('name2').value.trim(),
+    'Mina olen': selected('verb1') || '(нет ответа)',
+    'Sina oled': selected('verb2') || '(нет ответа)',
+    'Место проживания': document.getElementById('country').value.trim(),
+    'Вопрос о месте проживания': selected('where') || '(нет ответа)',
+    Знакомство: document.getElementById('intro').value.trim()
+  };
+
+  button.disabled = true;
+  button.textContent = 'Отправляю…';
+  feedback.textContent = 'Отправляю ответы преподавателю…';
+
+  try {
+    const response = await fetch(
+      'https://formsubmit.co/ajax/glorrass@gmail.com',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(answers)
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error('Request failed');
+    }
+
+    const result = await response.json();
+
+    if (result.success === true || result.success === 'true') {
+      feedback.textContent =
+        'Ответы отправлены преподавателю! Aitäh!';
+    } else {
+      throw new Error('Submission not confirmed');
+    }
+  } catch (error) {
+    feedback.textContent =
+      'Не удалось подтвердить отправку. Сделай скриншот ответов и отправь преподавателю. При первом использовании FormSubmit может потребоваться подтверждение адреса электронной почты.';
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Отправить ответы преподавателю';
+  }
+}
+</script>
+</body>
+</html>
