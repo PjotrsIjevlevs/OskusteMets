@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OskusteMets — Kolm vormi ja igapäevane eesti keel</title>
+<style>
+:root {
+  --bg:#101b17;
+  --panel:#192923;
+  --panel2:#20352b;
+  --green:#9ed6ad;
+  --mint:#c5f1d1;
+  --gold:#e7cf83;
+  --text:#f1f3e9;
+  --muted:#c0cabe;
+  --border:#405a49;
+  --correct:#a8e2b5;
+  --wrong:#ffb6a7;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:
+  radial-gradient(ellipse at top,#263d2c 0%,var(--bg) 58%);
+  color:var(--text);font:16px/1.65 system-ui,-apple-system,sans-serif;
+}
+header{padding:30px 18px 22px;text-align:center;border-bottom:1px solid var(--border)}
+.eyebrow{color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-size:12px}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.25}
+h1{font-size:clamp(29px,6vw,43px);color:var(--mint);margin:10px 0}
+header p{max-width:680px;margin:auto;color:var(--muted)}
+main{max-width:850px;margin:auto;padding:16px}
+.progress-wrap{position:sticky;top:0;background:#101b17ed;padding:10px 0;z-index:5}
+.progress-label{display:flex;justify-content:space-between;color:var(--muted);font-size:13px}
+.progress{height:7px;background:#33483a;border-radius:8px;overflow:hidden}
+.progress div{height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--gold));transition:width .2s}
+section{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:20px;margin:18px 0}
+.section-no{color:var(--gold);font-size:12px;letter-spacing:1.5px;text-transform:uppercase}
+h2{color:var(--mint);font-size:25px;margin:6px 0 12px}
+h3{color:var(--gold);font-size:19px}
+p{margin:9px 0}
+.muted,.hint{color:var(--muted)}
+.lesson-time{font-size:12px;color:var(--gold);float:right}
+.rule{background:var(--panel2);border-left:3px solid var(--gold);padding:13px 15px;border-radius:8px;margin:12px 0}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+th,td{padding:9px;border-bottom:1px solid var(--border);text-align:left}
+th{color:var(--gold)}
+.est{color:var(--mint);font-weight:650}
+.question{padding:13px 0;border-bottom:1px solid var(--border)}
+.question:last-child{border-bottom:0}
+label.option{display:flex;gap:9px;align-items:flex-start;padding:7px 9px;border-radius:8px;cursor:pointer}
+label.option:hover{background:#ffffff08}
+input[type=radio],input[type=checkbox]{accent-color:#9ed6ad;margin-top:6px;flex-shrink:0}
+input[type=text],input[type=url],textarea,select{
+  width:100%;background:#101b17;color:var(--text);
+  border:1px solid #587361;border-radius:9px;padding:11px;
+  font:inherit;margin-top:5px;
+}
+textarea{min-height:90px;resize:vertical}
+button{
+  border:0;border-radius:10px;padding:11px 16px;margin:8px 6px 4px 0;
+  font:inherit;font-weight:650;cursor:pointer;background:var(--green);color:#14251a;
+}
+button.secondary{background:#344b3a;color:var(--text);border:1px solid var(--border)}
+.feedback{margin-top:8px;font-weight:600}
+.good{color:var(--correct)}.bad{color:var(--wrong)}
+.wordbank{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+.wordbank span{background:#2b4032;border:1px solid var(--border);padding:4px 9px;border-radius:7px}
+.task{border:1px solid var(--border);border-radius:12px;padding:14px;margin:12px 0}
+.small{font-size:13px;color:var(--muted)}
+footer{text-align:center;color:var(--muted);padding:25px 10px}
+@media(max-width:520px){main{padding:10px}section{padding:15px}table{font-size:13px}th,td{padding:7px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">OskusteMets · Eesti keele rada</div>
+  <h1>Kolm vormi ja igapäevane eesti keel</h1>
+  <p>Harjutame koos. Kõigepealt kordame tuttavaid sõnu, siis uurime õpiku lehekülgi 16–19 ja lõpuks räägime ise eesti keeles.</p>
+</header>
+
+<main>
+<div class="progress-wrap">
+  <div class="progress-label"><span>Õpperada · учебный маршрут</span><span id="progressText">0% выполнено</span></div>
+  <div class="progress"><div id="progressBar"></div></div>
+</div>
+
+<form id="lessonForm">
+<section>
+  <div class="section-no">Enne alustamist <span class="lesson-time">2 min</span></div>
+  <h2>Alustame!</h2>
+  <p>Заполните имя и выполняйте задания по порядку. В упражнениях можно сначала подумать самостоятельно, а затем проверить ответы.</p>
+  <label for="studentName">Sinu nimi / Ваше имя</label>
+  <input id="studentName" name="Õpilase nimi" type="text" required placeholder="Kirjuta oma nimi">
+</section>
+
+<section>
+  <div class="section-no">1 · Kordamine <span class="lesson-time">5 min</span></div>
+  <h2>Tuttavad tegusõnad</h2>
+  <p>Выберите подходящую форму глагола. Это короткое повторение перед новой темой.</p>
+
+  <div class="question">
+    <p><b>1.</b> Mari ___ eesti keelt.</p>
+    <label class="option"><input type="radio" name="warm1" value="a"> õppima</label>
+    <label class="option"><input type="radio" name="warm1" value="b"> õpib</label>
+    <label class="option"><input type="radio" name="warm1" value="c"> õpin</label>
+  </div>
+  <div class="question">
+    <p><b>2.</b> Mina ___ õhtul kodus.</p>
+    <label class="option"><input type="radio" name="warm2" value="a"> olen</label>
+    <label class="option"><input type="radio" name="warm2" value="b"> on</label>
+    <label class="option"><input type="radio" name="warm2" value="c"> oled</label>
+  </div>
+  <div class="question">
+    <p><b>3.</b> Lapsed ___ magama kell kümme.</p>
+    <label class="option"><input type="radio" name="warm3" value="a"> hakkab</label>
+    <label class="option"><input type="radio" name="warm3" value="b"> hakkavad</label>
+    <label class="option"><input type="radio" name="warm3" value="c"> hakkan</label>
+  </div>
+  <div class="question">
+    <p><b>4.</b> Tund ___ kell viis.</p>
+    <label class="option"><input type="radio" name="warm4" value="a"> lõpeb</label>
+    <label class="option"><input type="radio" name="warm4" value="b"> lõpevad</label>
+    <label class="option"><input type="radio" name="warm4" value="c"> lõppema</label>
+  </div>
+  <div class="question">
+    <p><b>5.</b> Ma ___ hommikul kell seitse.</p>
+    <label class="option"><input type="radio" name="warm5" value="a"> ärkab</label>
+    <label class="option"><input type="radio" name="warm5" value="b"> ärkan</label>
+    <label class="option"><input type="radio" name="warm5" value="c"> ärkavad</label>
+  </div>
+  <button type="button" onclick="checkQuiz('warm',['b','a','b','a','b'],'warmFeedback')">Kontrolli vastuseid</button>
+  <div class="feedback" id="warmFeedback" aria-live="polite"></div>
+</section>
+
+<section>
+  <div class="section-no">2 · Õpik lk 16 <span class="lesson-time">7 min</span></div>
+  <h2>Ainsus: nimetav, omastav, osastav</h2>
+  <p>В учебнике на странице 16 показаны три формы существительного. Важно учить их вместе, как три формы одного слова.</p>
+  <table>
+    <thead><tr><th>Vorm</th><th>Küsimus</th><th>Näide</th></tr></thead>
+    <tbody>
+      <tr><td><span class="est">Nimetav</span></td><td>kes? mis?</td><td>must kass</td></tr>
+      <tr><td><span class="est">Omastav</span></td><td>kelle? mille?</td><td>musta kassi</td></tr>
+      <tr><td><span class="est">Osastav</span></td><td>keda? mida?</td><td>musta kassi</td></tr>
+    </tbody>
+  </table>
+  <div class="rule">
+    <p><b>Пример из модели учебника:</b></p>
+    <p class="est">See on itaalia keel.</p>
+    <p class="est">Mul on itaalia keele õpik.</p>
+    <p class="est">Ma õpin itaalia keelt.</p>
+    <p class="small">Это три разных контекста: «Это итальянский язык», «У меня есть учебник итальянского языка», «Я изучаю итальянский язык».</p>
+  </div>
+  <p>Сравните формы из словарной колонки на странице 16:</p>
+  <table>
+    <thead><tr><th>Nimetav</th><th>Omastav</th><th>Osastav</th></tr></thead>
+    <tbody>
+      <tr><td>raamat</td><td>raamatu</td><td>raamatut</td></tr>
+      <tr><td>must</td><td>musta</td><td>musta</td></tr>
+      <tr><td>kass</td><td>kassi</td><td>kassi</td></tr>
+      <tr><td>valge</td><td>valge</td><td>valget</td></tr>
+      <tr><td>koer</td><td>koera</td><td>koera</td></tr>
+      <tr><td>tark poiss</td><td>targa poisi</td><td>tarka poissi</td></tr>
+      <tr><td>ilus tüdruk</td><td>ilusa tüdruku</td><td>ilusat tüdrukut</td></tr>
+    </tbody>
+  </table>
+  <div class="rule">
+    <b>Обратите внимание:</b> окончания не всегда одинаковы. Например, *raamat → raamatu → raamatut*, но *koer → koera → koera*. Смотрите на конкретное слово и учите его формы вместе.
+  </div>
+</section>
+
+<section>
+  <div class="section-no">3 · Õpik lk 16–17 <span class="lesson-time">5 min</span></div>
+  <h2>Üks või mitu?</h2>
+  <p>В учебнике формы показаны на картинках: один предмет или человек, затем несколько.</p>
+  <div class="rule">
+    <p class="est">üks must kass → kaks musta kassi</p>
+    <p class="est">üks valge koer → kaks valget koera</p>
+    <p class="est">üks kollane sai → neli kollast saia</p>
+    <p class="est">üks pruun leib → viis pruuni leiba</p>
+    <p class="est">üks tark poiss → kuus tarka poissi</p>
+    <p class="est">üks ilus tüdruk → seitse ilusat tüdrukut</p>
+  </div>
+  <p>Здесь нужно обращать внимание сразу на числительное, прилагательное и существительное. После числительных от двух и выше в этих примерах используется форма, показанная в учебнике: *kaks kassi, neli saia, viis leiba*.</p>
+  <div class="question">
+    <p><b>1.</b> üks sinine pliiats → kaks ___ pliiatsit</p>
+    <label class="option"><input type="radio" name="number1" value="a"> sinine</label>
+    <label class="option"><input type="radio" name="number1" value="b"> sinist</label>
+    <label class="option"><input type="radio" name="number1" value="c"> sinised</label>
+  </div>
+  <div class="question">
+    <p><b>2.</b> üks punane lill → kümme ___ lille</p>
+    <label class="option"><input type="radio" name="number2" value="a"> punast</label>
+    <label class="option"><input type="radio" name="number2" value="b"> punane</label>
+    <label class="option"><input type="radio" name="number2" value="c"> punased</label>
+  </div>
+  <div class="question">
+    <p><b>3.</b> üks roheline vihik → kaheksa ___ vihikut</p>
+    <label class="option"><input type="radio" name="number3" value="a"> roheline</label>
+    <label class="option"><input type="radio" name="number3" value="b"> rohelised</label>
+    <label class="option"><input type="radio" name="number3" value="c"> rohelist</label>
+  </div>
+  <button type="button" onclick="checkQuiz('number',['b','a','c'],'numberFeedback')">Kontrolli vastuseid</button>
+  <div class="feedback" id="numberFeedback" aria-live="polite"></div>
+</section>
+
+<section>
+  <div class="section-no">4 · Õpik lk 17 <span class="lesson-time">6 min</span></div>
+  <h2>Värvid: see ja need</h2>
+  <p>Повторяем модель со страницы 17: один предмет и несколько предметов. Сравните формы прилагательных.</p>
+  <table>
+    <thead><tr><th>Ainsus · один</th><th>Mitmus · несколько</th></tr></thead>
+    <tbody>
+      <tr><td class="est">See kass on must.</td><td class="est">Need kassid on valged.</td></tr>
+      <tr><td class="est">See koer on pruun.</td><td class="est">Need koerad on hallid.</td></tr>
+      <tr><td class="est">See lill on punane.</td><td class="est">Need lilled on kollased.</td></tr>
+      <tr><td class="est">See pliiats on sinine.</td><td class="est">Need pliiatsid on pruunid.</td></tr>
+      <tr><td class="est">See laud on valge.</td><td class="est">Need lauad on rohelised.</td></tr>
+      <tr><td class="est">See tool on hall.</td><td class="est">Need toolid on punased.</td></tr>
+    </tbody>
+  </table>
+  <p>Выберите подходящее слово.</p>
+  <div class="question">
+    <p><b>1.</b> Need kassid on ___.</p>
+    <label class="option"><input type="radio" name="colour1" value="a"> valge</label>
+    <label class="option"><input type="radio" name="colour1" value="b"> valged</label>
+    <label class="option"><input type="radio" name="colour1" value="c"> valget</label>
+  </div>
+  <div class="question">
+    <p><b>2.</b> See lill on ___.</p>
+    <label class="option"><input type="radio" name="colour2" value="a"> punane</label>
+    <label class="option"><input type="radio" name="colour2" value="b"> punased</label>
+    <label class="option"><input type="radio" name="colour2" value="c"> punast</label>
+  </div>
+  <div class="question">
+    <p><b>3.</b> Need lauad on ___.</p>
+    <label class="option"><input type="radio" name="colour3" value="a"> valge</label>
+    <label class="option"><input type="radio" name="colour3" value="b"> valget</label>
+    <label class="option"><input type="radio" name="colour3" value="c"> rohelised</label>
+  </div>
+  <button type="button" onclick="checkQuiz('colour',['b','a','c'],'colourFeedback')">Kontrolli vastuseid</button>
+  <div class="feedback" id="colourFeedback" aria-live="polite"></div>
+</section>
+
+<section>
+  <div class="section-no">5 · Õpik lk 18 <span class="lesson-time">6 min</span></div>
+  <h2>Kellel on? Kellele meeldib?</h2>
+  <h3>1. Kellel on? · У кого есть?</h3>
+  <table>
+    <thead><tr><th>Эстонский</th><th>Пример</th></tr></thead>
+    <tbody>
+      <tr><td>minul / mul</td><td class="est">Mul on kaks venda.</td></tr>
+      <tr><td>sinul / sul</td><td class="est">Sul on kolm õde.</td></tr>
+      <tr><td>temal / tal</td><td class="est">Tal on neli koera.</td></tr>
+      <tr><td>meil</td><td class="est">Meil on viis kassi.</td></tr>
+      <tr><td>teil</td><td class="est">Teil on kuus õpilast.</td></tr>
+      <tr><td>nendel / neil</td><td class="est">Neil on seitse õpetajat.</td></tr>
+    </tbody>
+  </table>
+  <div class="rule">
+    <p><b>Отрицание:</b> используем <span class="est">ei ole</span> или короткую форму <span class="est">pole</span>.</p>
+    <p class="est">Minul ei ole venda. / Mul pole venda.</p>
+    <p class="est">Temal ei ole õde ega venda.</p>
+    <p class="est">Nendel pole koera ega kassi.</p>
+  </div>
+  <h3>2. Kellele meeldib? · Кому нравится?</h3>
+  <table>
+    <thead><tr><th>Форма</th><th>Пример</th></tr></thead>
+    <tbody>
+      <tr><td>minule / mulle</td><td class="est">Mulle meeldib hommik.</td></tr>
+      <tr><td>sinule / sulle</td><td class="est">Sulle meeldib päev.</td></tr>
+      <tr><td>temale / talle</td><td class="est">Talle meeldib õhtu.</td></tr>
+      <tr><td>meile</td><td class="est">Meile meeldib öö.</td></tr>
+      <tr><td>teile</td><td class="est">Teile meeldib töö.</td></tr>
+      <tr><td>nendele / neile</td><td class="est">Neile meeldivad öötööd.</td></tr>
+    </tbody>
+  </table>
+  <p><b>Запомните:</b> <span class="est">meeldib</span> — когда нравится один предмет или явление; <span class="est">meeldivad</span> — когда нравятся несколько предметов.</p>
+  <div class="question">
+    <p><b>1.</b> ___ on kaks venda. (У меня есть два брата.)</p>
+    <label class="option"><input type="radio" name="kellel1" value="a"> Mulle</label>
+    <label class="option"><input type="radio" name="kellel1" value="b"> Mul</label>
+    <label class="option"><input type="radio" name="kellel1" value="c"> Mina</label>
+  </div>
+  <div class="question">
+    <p><b>2.</b> Mulle ___ kollane.</p>
+    <label class="option"><input type="radio" name="kellel2" value="a"> meeldivad</label>
+    <label class="option"><input type="radio" name="kellel2" value="b"> meeldib</label>
+    <label class="option"><input type="radio" name="kellel2" value="c"> meeldima</label>
+  </div>
+  <div class="question">
+    <p><b>3.</b> Mulle ___ kollased lilled.</p>
+    <label class="option"><input type="radio" name="kellel3" value="a"> meeldib</label>
+    <label class="option"><input type="radio" name="kellel3" value="b"> meeldivad</label>
+    <label class="option"><input type="radio" name="kellel3" value="c"> meeldima</label>
+  </div>
+  <div class="question">
+    <p><b>4.</b> Mul ___ venda ega õde.</p>
+    <label class="option"><input type="radio" name="kellel4" value="a"> pole</label>
+    <label class="option"><input type="radio" name="kellel4" value="b"> olen</label>
+    <label class="option"><input type="radio" name="kellel4" value="c"> meeldib</label>
+  </div>
+  <button type="button" onclick="checkQuiz('kellel',['b','b','b','a'],'kellelFeedback')">Kontrolli vastuseid</button>
+  <div class="feedback" id="kellelFeedback" aria-live="polite"></div>
+</section>
+
+<section>
+  <div class="section-no">6 · Õpik lk 19 <span class="lesson-time">6 min</span></div>
+  <h2>Kirjutame õpiku eeskujul</h2>
+  <p>Заполните пропуски. Это модели из упражнений на странице 19. Вписывайте только недостающее слово или форму.</p>
+  <div class="question">
+    <label for="w1"><b>1.</b> Ema õpetab ___ oma emakeelt. (мне)</label>
+    <input id="w1" name="Kirjutamine 1" type="text" placeholder="...">
+  </div>
+  <div class="question">
+    <label for="w2"><b>2.</b> Kas sa räägid ___ prantsuse keelt? (по-французски / французский язык)</label>
+    <input id="w2" name="Kirjutamine 2" type="text" placeholder="...">
+  </div>
+  <div class="question">
+    <label for="w3"><b>3.</b> Me ___ Mustamäel. (живём)</label>
+    <input id="w3" name="Kirjutamine 3" type="text" placeholder="...">
+  </div>
+  <div class="question">
+    <label for="w4"><b>4.</b> Poisid ___ raamatut. (читают)</label>
+    <input id="w4" name="Kirjutamine 4" type="text" placeholder="...">
+  </div>
+  <div class="question">
+    <label for="w5"><b>5.</b> Kas sa tead, ___ vihik see on? (чей)</label>
+    <input id="w5" name="Kirjutamine 5" type="text" placeholder="...">
+  </div>
+  <div class="question">
+    <label for="w6"><b>6.</b> Mulle ___ kollane. (нравится)</label>
+    <input id="w6" name="Kirjutamine 6" type="text" placeholder="...">
+  </div>
+  <div class="question">
+    <label for="w7"><b>7.</b> Me oleme head ___. (ученики)</label>
+    <input id="w7" name="Kirjutamine 7" type="text" placeholder="...">
+  </div>
+  <div class="question">
+    <label for="w8"><b>8.</b> Meile ___ see raamat väga. (нравится)</label>
+    <input id="w8" name="Kirjutamine 8" type="text" placeholder="...">
+  </div>
+  <button type="button" class="secondary" onclick="showWritingAnswers()">Vaata näidisvastuseid</button>
+  <div id="writingAnswers" class="rule" hidden>
+    <p>1. mulle</p><p>2. prantsuse keelt</p><p>3. elame</p><p>4. loevad</p>
+    <p>5. kelle</p><p>6. meeldib</p><p>7. õpilased</p><p>8. meeldib</p>
+    <p class="small">В №2 впишите всю конструкцию, если хотите потренировать её целиком. В остальных заданиях достаточно одного слова.</p>
+  </div>
+</section>
+
+<section>
+  <div class="section-no">7 · Rääkimine <span class="lesson-time">5 min</span></div>
+  <h2>Heliülesanne 1: Minu pere</h2>
+  <p>Запишите аудио на эстонском языке продолжительностью примерно 1–2 минуты. Используйте модели из страниц 18–19.</p>
+  <div class="rule">
+    <p class="est">Mul on ...</p>
+    <p class="est">Mul ei ole ...</p>
+    <p class="est">Minu ... nimi on ...</p>
+    <p class="est">Mulle meeldib ...</p>
+    <p class="est">Mulle meeldivad ...</p>
+  </div>
+  <p>Расскажите, есть ли у вас братья, сёстры или домашние животные, как их зовут и что вам нравится. Если не хотите рассказывать о своей семье, придумайте персонажа.</p>
+  <div class="task">
+    <label for="audio1">Heliülesanne 1 · аудиоссылка</label>
+    <input id="audio1" name="Audio 1 link" type="url" placeholder="https://...">
+    <p class="small">Можно записать голос на телефоне или компьютере, загрузить запись в облако и вставить ссылку. Проверьте, что ссылка доступна преподавателю.</p>
+  </div>
+</section>
+
+<section>
+  <div class="section-no">8 · Rääkimine <span class="lesson-time">5 min</span></div>
+  <h2>Heliülesanne 2: Mis mulle meeldib?</h2>
+  <p>Запишите ещё одно аудио на 1–2 минуты. Расскажите о цветах, предметах и времени суток, которые вам нравятся.</p>
+  <div class="rule">
+    <p class="est">Minu lemmikvärv on ...</p>
+    <p class="est">Mulle meeldib ...</p>
+    <p class="est">Mulle meeldivad ...</p>
+    <p class="est">Mulle meeldib hommik / päev / õhtu / öö.</p>
+    <p class="est">Mulle ei meeldi ...</p>
+  </div>
+  <p>Попробуйте употребить хотя бы одно предложение с <span class="est">meeldib</span>, одно с <span class="est">meeldivad</span> и одно с отрицанием.</p>
+  <div class="task">
+    <label for="audio2">Heliülesanne 2 · аудиоссылка</label>
+    <input id="audio2" name="Audio 2 link" type="url" placeholder="https://...">
+    <p class="small">Не нужно прикреплять аудиофайл к форме. Достаточно вставить ссылку на запись.</p>
+  </div>
+</section>
+
+<section>
+  <div class="section-no">9 · Lõpetamine <span class="lesson-time">3 min</span></div>
+  <h2>Kuidas läks?</h2>
+  <p>Отметьте, что получилось сделать сегодня.</p>
+  <label class="option"><input type="checkbox" name="Oskus 1" value="Jah"> Ma oskan nimetada kolme vormi: nimetav, omastav, osastav.</label>
+  <label class="option"><input type="checkbox" name="Oskus 2" value="Jah"> Ma oskan öelda, mis mulle meeldib.</label>
+  <label class="option"><input type="checkbox" name="Oskus 3" value="Jah"> Ma oskan rääkida sellest, kellel midagi on.</label>
+  <label class="option"><input type="checkbox" name="Oskus 4" value="Jah"> Ma salvestasin või plaanin salvestada mõlemad helid.</label>
+  <label for="reflection">Mis oli täna lihtne või raske? / Что сегодня было легко или трудно?</label>
+  <textarea id="reflection" name="Õpilase kommentaar" placeholder="Kirjuta siia..."></textarea>
+  <button type="submit" id="submitBtn">Saada vastused õpetajale</button>
+  <div class="feedback" id="submitFeedback" aria-live="polite"></div>
+</section>
+</form>
+<footer>OskusteMets · Sammhaaval eesti keeles</footer>
+</main>
+
+<script>
+const answers = {
+  warm: ['b','a','b','a','b'],
+  number: ['b','a','c'],
+  colour: ['b','a','c'],
+  kellel: ['b','b','b','a']
+};
+
+function checkQuiz(prefix, correct, feedbackId) {
+  let score = 0;
+  let answered = 0;
+  correct.forEach((answer, i) => {
+    const chosen = document.querySelector('input[name="' + prefix + (i + 1) + '"]:checked');
+    if (chosen) {
+      answered++;
+      if (chosen.value === answer) score++;
+    }
+  });
+  const feedback = document.getElementById(feedbackId);
+  feedback.className = 'feedback ' + (score === correct.length ? 'good' : 'bad');
+  feedback.textContent = answered < correct.length
+    ? 'Vastatud: ' + answered + '/' + correct.length + '. Vasta kõigile küsimustele ja kontrolli uuesti.'
+    : 'Õigeid vastuseid: ' + score + '/' + correct.length + '. ' +
+      (score === correct.length ? 'Väga hea! Kõik on õige.' : 'Vaata näiteid uuesti ja proovi veel kord.');
+  updateProgress();
+}
+
+function showWritingAnswers() {
+  const box = document.getElementById('writingAnswers');
+  box.hidden = !box.hidden;
+  if (!box.hidden) box.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function updateProgress() {
+  const fields = [...document.querySelectorAll('#lessonForm input, #lessonForm textarea')];
+  const relevant = fields.filter(el => el.type !== 'radio' && el.type !== 'checkbox' && el.type !== 'submit');
+  const radioNames = [...new Set(fields.filter(el => el.type === 'radio').map(el => el.name))];
+  const checks = fields.filter(el => el.type === 'checkbox');
+  let done = relevant.filter(el => el.value.trim()).length;
+  done += radioNames.filter(name => document.querySelector('input[name="' + name + '"]:checked')).length;
+  done += checks.filter(el => el.checked).length;
+  const total = relevant.length + radioNames.length + checks.length;
+  const percent = total ? Math.round(done / total * 100) : 0;
+  document.getElementById('progressBar').style.width = percent + '%';
+  document.getElementById('progressText').textContent = percent + '% выполнено';
+}
+
+document.querySelectorAll('#lessonForm input, #lessonForm textarea').forEach(el => {
+  el.addEventListener('input', updateProgress);
+  el.addEventListener('change', updateProgress);
+});
+
+document.getElementById('lessonForm').addEventListener('submit', async function(event) {
+  event.preventDefault();
+  const feedback = document.getElementById('submitFeedback');
+  const button = document.getElementById('submitBtn');
+  if (!document.getElementById('studentName').value.trim()) {
+    feedback.className = 'feedback bad';
+    feedback.textContent = 'Palun kirjuta oma nimi. / Пожалуйста, укажите имя.';
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = 'Saadan...';
+  feedback.className = 'feedback';
+  feedback.textContent = 'Vastuste saatmine...';
+
+  const formData = new FormData(this);
+  formData.append('_subject', 'OskusteMets — eesti keele ülesanne');
+  formData.append('_template', 'table');
+  formData.append('_captcha', 'false');
+
+  try {
+    const response = await fetch('https://formsubmit.co/ajax/glorrass@gmail.com', {
+      method: 'POST',
+      body: formData,
+      headers: {'Accept': 'application/json'}
+    });
+    if (!response.ok) throw new Error('Submission failed');
+    const result = await response.json();
+    if (result.success === 'false') throw new Error('Submission failed');
+
+    feedback.className = 'feedback good';
+    feedback.textContent = 'Aitäh! Vastused on saadetud õpetajale. / Спасибо! Ответы отправлены преподавателю.';
+    button.textContent = 'Saadetud';
+  } catch (error) {
+    feedback.className = 'feedback bad';
+    feedback.textContent = 'Saatmine ei õnnestunud. Palun proovi uuesti või saada õpetajale ekraanipilt vastustest. / Не удалось отправить ответы. Попробуйте ещё раз.';
+    button.disabled = false;
+    button.textContent = 'Saada vastused õpetajale';
+  }
+});
+
+updateProgress();
+</script>
+</body>
+</html>
