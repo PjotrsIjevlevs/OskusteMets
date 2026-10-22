@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OskusteMets | Numbrid ja aadress</title>
+<style>
+:root {
+  --bg:#101b17;
+  --card:#192922;
+  --card2:#22372d;
+  --text:#f2f3e9;
+  --muted:#bdcbbf;
+  --mint:#a8e6bd;
+  --gold:#f1d58a;
+  --border:#3d5948;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font:16px/1.65 system-ui,-apple-system,sans-serif;
+}
+header{
+  text-align:center;padding:35px 18px 28px;
+  background:radial-gradient(ellipse at top,#294b38,transparent 75%);
+}
+.brand{color:var(--mint);font-size:12px;letter-spacing:3px}
+h1{font-family:Georgia,serif;font-size:clamp(29px,6vw,42px);line-height:1.2;margin:12px 0}
+header p{max-width:600px;margin:8px auto;color:var(--muted)}
+main{max-width:800px;margin:auto;padding:20px 16px 45px}
+.card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:20px;margin-bottom:17px;
+}
+h2{font: bold 25px/1.25 Georgia,serif;color:var(--mint);margin:0 0 8px}
+h3{font-size:17px;color:var(--gold);margin:20px 0 7px}
+.hint{color:var(--muted);font-size:14px;margin:0 0 14px}
+.note{
+  background:var(--card2);border-left:3px solid var(--gold);
+  border-radius:0 9px 9px 0;padding:12px 14px;margin:12px 0;
+}
+.words{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:8px}
+.word{background:var(--card2);border-radius:9px;padding:9px 11px}
+.word b{color:var(--mint)}
+.word span{display:block;color:var(--muted);font-size:14px}
+label{display:block;font-weight:600;margin:11px 0 5px}
+input[type=text],input[type=email],textarea,select{
+  width:100%;background:#101b17;color:var(--text);
+  border:1px solid var(--border);border-radius:8px;
+  padding:11px 12px;font:inherit;
+}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--mint)}
+textarea{min-height:115px;resize:vertical}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+th,td{padding:8px 6px;border:1px solid var(--border);text-align:left;vertical-align:middle}
+th{background:var(--card2);color:var(--mint)}
+td input{min-width:65px}
+.task{margin:15px 0;padding-bottom:13px;border-bottom:1px solid var(--border)}
+.task:last-child{border-bottom:0}
+.task p{margin:0 0 8px}
+.options label{font-weight:400;margin:7px 0}
+button{
+  display:block;width:100%;margin-top:20px;padding:15px;
+  border:0;border-radius:11px;background:var(--mint);color:#122319;
+  font-weight:750;font-size:16px;cursor:pointer;
+}
+button:hover{filter:brightness(1.04)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:8px 0 20px}
+@media(max-width:500px){.card{padding:15px}table{font-size:12px}th,td{padding:6px 4px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">OSKUSTEMETS · EESTI KEEL</div>
+  <h1>Numbrid, aadressid ja sõnad</h1>
+  <p>Повторяем лексику, три формы слов, порядковые числительные и учимся спрашивать адрес и номер телефона.</p>
+  <p>🌿 Примерно 20 минут</p>
+</header>
+
+<main>
+<form action="https://formsubmit.co/glorrass@gmail.com" method="POST">
+
+  <input type="hidden" name="_subject" value="OskusteMets — Eesti keel: numbrid ja aadressid">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_captcha" value="false">
+
+  <section class="card">
+    <h2>Enne alustamist</h2>
+    <p class="hint">Перед началом укажите имя. Пишите ответы по-эстонски. Не забудьте отправить работу в конце.</p>
+    <label for="student">Ваше имя</label>
+    <input id="student" name="Имя ученицы" type="text" required placeholder="Имя">
+  </section>
+
+  <section class="card">
+    <h2>1. Sõnavara · Лексика</h2>
+    <p class="hint">2 минуты. Прочитайте и вспомните значения слов.</p>
+    <div class="words">
+      <div class="word"><b>aadress</b><span>адрес</span></div>
+      <div class="word"><b>telefoninumber</b><span>номер телефона</span></div>
+      <div class="word"><b>korter</b><span>квартира</span></div>
+      <div class="word"><b>tänav</b><span>улица</span></div>
+      <div class="word"><b>maantee</b><span>шоссе, большая дорога</span></div>
+      <div class="word"><b>puiestee</b><span>проспект, бульвар</span></div>
+      <div class="word"><b>ümbrik</b><span>конверт</span></div>
+      <div class="word"><b>number</b><span>номер, число</span></div>
+      <div class="word"><b>õige</b><span>правильный</span></div>
+      <div class="word"><b>vale</b><span>неправильный, ошибочный</span></div>
+      <div class="word"><b>ühendus</b><span>соединение, связь</span></div>
+      <div class="word"><b>hõivatud</b><span>занято</span></div>
+      <div class="word"><b>sil m</b><span>глаз (правильно: silm)</span></div>
+      <div class="word"><b>kõrv</b><span>ухо</span></div>
+      <div class="word"><b>käsi</b><span>рука, кисть</span></div>
+      <div class="word"><b>jalg</b><span>нога</span></div>
+    </div>
+
+    <h3>Tõlgi eesti keelde</h3>
+    <p class="hint">Переведите слова на эстонский.</p>
+
+    <label for="v1">1. Адрес</label>
+    <input id="v1" name="Перевод: адрес" type="text" required>
+
+    <label for="v2">2. Номер телефона</label>
+    <input id="v2" name="Перевод: номер телефона" type="text" required>
+
+    <label for="v3">3. Квартира</label>
+    <input id="v3" name="Перевод: квартира" type="text" required>
+
+    <label for="v4">4. Правильный / верный</label>
+    <input id="v4" name="Перевод: правильный" type="text" required>
+
+    <label for="v5">5. Конверт</label>
+    <input id="v5" name="Перевод: конверт" type="text" required>
+  </section>
+
+  <section class="card">
+    <h2>2. Kolm vormi · Три формы</h2>
+    <p class="hint">4 минуты. Заполните таблицы. Для существительных нужны nimetav, omastav и osastav.</p>
+
+    <div class="note">
+      <b>Nimetav:</b> kes? mis? · кто? что?<br>
+      <b>Omastav:</b> kelle? mille? · чей? чего?<br>
+      <b>Osastav:</b> keda? mida? · кого? что?
+    </div>
+
+    <table>
+      <thead><tr><th>Nimetav</th><th>Omastav</th><th>Osastav</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>aadress</b></td>
+          <td><input name="aadress omastav" type="text" aria-label="aadress omastav" required></td>
+          <td><input name="aadress osastav" type="text" aria-label="aadress osastav" required></td>
+        </tr>
+        <tr>
+          <td><b>number</b></td>
+          <td><input name="number omastav" type="text" aria-label="number omastav" required></td>
+          <td><input name="number osastav" type="text" aria-label="number osastav" required></td>
+        </tr>
+        <tr>
+          <td><b>ümbrik</b></td>
+          <td><input name="ümbrik omastav" type="text" aria-label="ümbrik omastav" required></td>
+          <td><input name="ümbrik osastav" type="text" aria-label="ümbrik osastav" required></td>
+        </tr>
+        <tr>
+          <td><b>inimene</b></td>
+          <td><input name="inimene omastav" type="text" aria-label="inimene omastav" required></td>
+          <td><input name="inimene osastav" type="text" aria-label="inimene osastav" required></td>
+        </tr>
+        <tr>
+          <td><b>linn</b></td>
+          <td><input name="linn omastav" type="text" aria-label="linn omastav" required></td>
+          <td><input name="linn osastav" type="text" aria-label="linn osastav" required></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Omadussõnad · Прилагательные</h3>
+    <p class="hint">Заполните недостающие формы.</p>
+    <table>
+      <thead><tr><th>Nimetav</th><th>Omastav</th><th>Osastav</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>õige</b></td>
+          <td><input name="õige omastav" type="text" aria-label="õige omastav" required></td>
+          <td><input name="õige osastav" type="text" aria-label="õige osastav" required></td>
+        </tr>
+        <tr>
+          <td><b>vale</b></td>
+          <td><input name="vale omastav" type="text" aria-label="vale omastav" required></td>
+          <td><input name="vale osastav" type="text" aria-label="vale osastav" required></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Tegusõnad · Глаголы</h3>
+    <p class="hint">Напишите три формы: ma-infinitiiv, da-infinitiiv и tema (3-е лицо).</p>
+    <table>
+      <thead><tr><th>ma-vorm</th><th>da-vorm</th><th>tema</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>küsima</b></td>
+          <td><input name="küsima da-vorm" type="text" aria-label="küsima da-vorm" required></td>
+          <td><input name="küsima tema" type="text" aria-label="küsima tema" required></td>
+        </tr>
+        <tr>
+          <td><b>paluma</b></td>
+          <td><input name="paluma da-vorm" type="text" aria-label="paluma da-vorm" required></td>
+          <td><input name="paluma tema" type="text" aria-label="paluma tema" required></td>
+        </tr>
+        <tr>
+          <td><b>vastama</b></td>
+          <td><input name="vastama da-vorm" type="text" aria-label="vastama da-vorm" required></td>
+          <td><input name="vastama tema" type="text" aria-label="vastama tema" required></td>
+        </tr>
+        <tr>
+          <td><b>ütlema</b></td>
+          <td><input name="ütlema da-vorm" type="text" aria-label="ütlema da-vorm" required></td>
+          <td><input name="ütlema tema" type="text" aria-label="ütlema tema" required></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>3. Järgarvud · Порядковые числительные</h2>
+    <p class="hint">3 минуты. Напишите по-эстонски: первый, второй, третий и так далее.</p>
+
+    <div class="task">
+      <label for="o1">1. Первый</label>
+      <input id="o1" name="Порядковое: первый" type="text" required>
+    </div>
+    <div class="task">
+      <label for="o2">2. Второй</label>
+      <input id="o2" name="Порядковое: второй" type="text" required>
+    </div>
+    <div class="task">
+      <label for="o3">3. Третий</label>
+      <input id="o3" name="Порядковое: третий" type="text" required>
+    </div>
+    <div class="task">
+      <label for="o4">4. Четвёртый</label>
+      <input id="o4" name="Порядковое: четвертый" type="text" required>
+    </div>
+    <div class="task">
+      <label for="o5">5. Пятый</label>
+      <input id="o5" name="Порядковое: пятый" type="text" required>
+    </div>
+
+    <h3>Arvud · Числа</h3>
+    <p class="hint">Запишите числа словами по-эстонски.</p>
+
+    <label for="n1">11</label>
+    <input id="n1" name="Число 11" type="text" required>
+
+    <label for="n2">20</label>
+    <input id="n2" name="Число 20" type="text" required>
+
+    <label for="n3">100</label>
+    <input id="n3" name="Число 100" type="text" required>
+  </section>
+
+  <section class="card">
+    <h2>4. Mis on teie aadress?</h2>
+    <p class="hint">4 минуты. Ответьте на вопросы и дополните короткие диалоги.</p>
+
+    <div class="note">
+      <b>Полезные выражения:</b><br>
+      Mis on teie aadress? — Какой у вас адрес?<br>
+      Mis on teie telefoninumber? — Какой у вас номер телефона?<br>
+      Mis tänaval te elate? — На какой улице вы живёте?<br>
+      Mis on teie korterinumber? — Какой у вас номер квартиры?<br>
+      Palun korrake! — Повторите, пожалуйста!<br>
+      Palun vabandust! — Прошу прощения!
+    </div>
+
+    <label for="a1">1. Как спросить по-эстонски «На какой улице вы живёте?»</label>
+    <input id="a1" name="Фраза: на какой улице живете" type="text" required>
+
+    <label for="a2">2. Как попросить собеседника повторить номер телефона?</label>
+    <input id="a2" name="Фраза: повторите номер телефона" type="text" required>
+
+    <label for="a3">3. Как сказать «У меня нет телефона»?</label>
+    <input id="a3" name="Фраза: у меня нет телефона" type="text" required>
+
+    <h3>Täida dialoog · Дополните диалог</h3>
+    <p>— Tere! Mis on teie <b>__________</b>?</p>
+    <p>— Lai tänav 17.</p>
+    <p>— Aga teie <b>__________</b>?</p>
+    <p>— 653 866.</p>
+    <label for="d1">Впишите два пропущенных слова через запятую.</label>
+    <input id="d1" name="Диалог: пропущенные слова" type="text" required placeholder="Слово 1, слово 2">
+
+    <h3>Õige või vale? · Верно или неверно?</h3>
+    <p class="hint">Выберите подходящее слово для каждой ситуации.</p>
+
+    <div class="task">
+      <p>1. Вы услышали правильный адрес. Адрес — …</p>
+      <div class="options">
+        <label><input type="radio" name="Адрес правильный" value="õige" required> õige</label>
+        <label><input type="radio" name="Адрес правильный" value="vale"> vale</label>
+      </div>
+    </div>
+
+    <div class="task">
+      <p>2. Телефон сообщает, что линия занята. Соединение — …</p>
+      <div class="options">
+        <label><input type="radio" name="Линия занята" value="hõivatud" required> hõivatud</label>
+        <label><input type="radio" name="Линия занята" value="õige"> õige</label>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>5. Minu aadress · Письменное задание</h2>
+    <p class="hint">5 минут. Напишите 4–6 предложений на эстонском. Можно использовать вымышленный адрес и номер телефона.</p>
+
+    <div class="note">
+      Постарайтесь включить:
+      <ul>
+        <li>свой адрес или название улицы;</li>
+        <li>номер дома или квартиры;</li>
+        <li>номер телефона;</li>
+        <li>одно порядковое числительное;</li>
+        <li>один глагол из упражнения выше.</li>
+      </ul>
+    </div>
+
+    <label for="writing">Minu aadress ja telefoninumber</label>
+    <textarea id="writing" name="Письменное задание" required minlength="20"
+      placeholder="Minu aadress on ...&#10;Ma elan ...&#10;Minu telefoninumber on ..."></textarea>
+  </section>
+
+  <button type="submit">Saada vastused · Отправить ответы</button>
+  <p class="hint" style="text-align:center;margin-top:12px">
+    Проверьте, что заполнили все обязательные поля, и нажмите кнопку отправки один раз.
+  </p>
+</form>
+<footer>OskusteMets · Harjuta natuke iga päev 🌿</footer>
+</main>
+</body>
+</html>
